@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "豆瓣+图书馆查询助手",
+  "permissions": ["storage","tabs"],
+  "version": "1.0.2",
+  "action": {
+    "default_icon": "img/book_128.png",
+    "default_popup": "popup.html",
+    "default_title": "豆瓣+图书馆查询助手"
+  },
+
+  "content_scripts": [
+    {
+      "js": ["content.mjs", "provinces.js","jquery.min.js"],
+      "matches": ["*://book.douban.com/subject/*"]
+    }
+  ],
+  "description": "帮助用户快速查询指定图书馆图书信息，让用户更轻松地找到所需的图书馆资源。",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "128": "img/book_128.png",
+    "16": "img/book_16.png",
+    "32": "img/book_32.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

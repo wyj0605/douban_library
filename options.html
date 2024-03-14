@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豆瓣+图书馆查询助手</title>
+    <link href="tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        crossorigin="anonymous">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* .header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            text-align: center;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        } */
+
+    </style>
+</head>
+
+<body>
+    <header class="bg-gradient-to-r from-green-600 via-green-600 to-green-200  bg-noise bg-gradient-to-r bg-stripes  flex justify-center items-center">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl tracking-widest text-white "><i class="fa fa-book"></i>豆瓣+图书馆查询助手</h1>
+                </div>
+
+        </div>
+    </header>
+    <div class="p-4 bg-green-100 border-l-4 border-green-500">
+        <div class="flex items-center justify-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-info-circle text-green-500"></i>
+            </div>
+            <div class="ml-3">
+                <p class="text-lg text-green-700">请选择相应的图书馆</p>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white shadow-md">
+        <div class="container">
+            <div id="provinceList" class="grid grid-cols-3 gap-4 py-4 text-xl">
+            </div>
+        </div>
+        <div class="bg-black/5 p-6 text-center  bg-noise bg-gradient-to-r bg-stripes bg-gray-80">
+            <span>© 2024 Copyright:</span>
+            <a class="font-semibold" href="http://www.navy81.com">无理数</a>
+              <a href="https://github.com/wyj0605/" class=" hover:text-white mr-3"><i class="fab fa-github"></i></a>
+              <a href="https://twitter.com/wyj0605" class="hover:text-white mr-3"><i class="fab fa-twitter"></i></a>
+              <a href="https://weibo.com/u/1473901087" class="hover:text-white"><i class="fab fa-weibo"></i></a>
+          </div>
+    </div>
+
+    <script src="provinces.mjs" type="module"></script>
+    <script src="options.mjs" type="module"></script>
+
+</body>
+
+</html>

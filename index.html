@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>豆瓣+图书馆查询助手</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+    .text-column {
+      flex: 1;
+      margin-right: 20px;
+    }
+    .image-column {
+      flex: 1;
+    }
+    .main {
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      animation: backgroundAnimation 30s infinite linear;
+    }
+
+    @keyframes backgroundAnimation {
+      0% {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.993) 40%, transparent 50% ), url('Snipaste_2024-03-14_12-26-49.png');
+      }
+      50% {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.993) 40%, transparent 50%), url('GIiLzfNboAAuHGC.jpg');
+      }
+      100% {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.993) 40%, transparent 50%), url('Snipaste_2024-03-14_14-05-25.png');
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-white px-40 py-2">
+    <!-- <header class="bg-green-800">
+      <div class="container mx-auto px-4 py-2">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-white font-bold flex items-center"><i class="fa fa-book mr-2"></i>豆瓣+图书馆查询助手</a>
+        </div>
+      </div>
+    </header> -->
+    <main class="main px-4 py-12 container mx-auto px-4 py-12">
+      <div class="flex">
+        <div class="text-column">
+          <section class="mb-12">
+            <h2 class="text-4xl font-bold text-green-800 mb-6">豆瓣+图书馆查询助手</h2>
+            <div class="mt-4">
+              <p class="text-green-800 pl-2">帮助用户浏览豆瓣读时自动查询图书馆的图书信息，从而让用户更轻松地找到所需的图书资源。通过这一插件，用户能够快速了解图书馆藏书情况，轻松获取所需的图书资料，提高了图书查询的效率和便捷性。</p>
+            </div>
+            <div class="text-green-800 pl-2">
+              支持的图书馆：
+              <ul class="list-disc pl-6 mt-2">
+                <li>黑龙江省图书馆</li>
+                <li>辽宁省图书馆</li>
+                <li>山西省图书馆</li>
+                <li>浙江省图书馆</li>
+                <li>福建省图书馆</li>
+                <li>湖南省图书馆</li>
+                <li>新疆维吾尔自治区图书馆</li>
+                <li>青岛市图书馆</li>
+              </ul>
+            </div>
+          </section>
+          <div class="px-6 py-4">
+            <p class="text-gray-600 leading-relaxed mb-4">下载插件：</p>
+            <a href="#" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
+              <i class="fab fa-chrome mr-2"></i>
+              Chrome 网上应用店
+            </a>
+            <a href="#" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
+              <i class="fab fa-edge mr-2"></i>
+              Microsoft Edge 插件中心
+            </a>
+            <a href="#" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
+              <i class="fab fa-firefox mr-2"></i>
+              Firefox 插件
+            </a>
+          </div>
+        </div>
+        <div class="image-column">
+          <!-- <img src="20240314114728.png" alt="Your Image" class="w-full h-full"> -->
+        </div>
+      </div>
+    </main>
+    
+    <footer class=" py-4">
+      <div class="container mx-auto px-4 flex justify-center items-center">
+        <p class="text-green-800 text-center mr-4">Copyright &copy; 2024 无理数</p>
+        <a href="https://github.com/wyj0605/" class="text-green-800 hover:text-white mr-4"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com/wyj0605" class="text-green-800 hover:text-white mr-4"><i class="fab fa-twitter"></i></a>
+        <a href="https://weibo.com/u/1473901087" class="text-green-800 hover:text-white"><i class="fab fa-weibo"></i></a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
