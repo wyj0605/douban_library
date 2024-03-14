@@ -15,7 +15,7 @@
       "matches": ["*://book.douban.com/subject/*"]
     }
   ],
-  "description": "帮助用户快速查询指定图书馆图书信息，让用户更轻松地找到所需的图书馆资源。",
+  "description": "自动查询指定图书馆图书信息，让用户更轻松地找到所需的图书馆资源。",
   "background": {
     "service_worker": "background.js"
   },
