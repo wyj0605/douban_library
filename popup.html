@@ -1,74 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link href="tailwind.min.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css"
-    />
 
-    <style>
-      body {
-        background-image: url("background.jpg"); /* Replace 'background.jpg' with your background image path */
-        background-size: cover;
-        background-position: center;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <link href="tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
 
-      #provinceList .item.selected {
-        background-color: #007bff;
-        color: white;
-      }
+  <style>
+    body {
+      background-image: url("background.jpg");
+      /* Replace 'background.jpg' with your background image path */
+      background-size: cover;
+      background-position: center;
+    }
 
-      .open-options {
-        cursor: pointer;
-        transition: color 0.3s;
-      }
+    #provinceList .item.selected {
+      background-color: #007bff;
+      color: white;
+    }
 
-      .open-options:hover {
-        color: #4b5563;
-      }
-    </style>
-  </head>
+    .open-options {
+      cursor: pointer;
+      transition: color 0.3s;
+    }
 
-  <body class="flex justify-center" style="width: 300px">
-    <div class="bg-white shadow-md w-full">
-      <header
-        class="bg-green-500 bg-noise bg-gradient-to-r bg-stripes md-3 tracking-wide text-white text-lg flex justify-between py-1 px-11 shadow-sm"
-      >
-        <h4>豆瓣+图书馆查询助手</h4>
-        <div id="openOptions" class="open-options">
-          <i
-            class="fas fa-cog fa-check-circle text-wihte-400"
-            title="设置查询图书馆"
-          ></i>
-          <!-- Font Awesome 图标 -->
-        </div>
-      </header>
-      <div class="container" style="height: 80px">
-        <div style="height: 20px"></div>
-        <div id="provinceList" class="text-xl grid place-items-center"></div>
+    .open-options:hover {
+      color: #4b5563;
+    }
+  </style>
+</head>
+
+<body class="flex justify-center" style="width: 300px">
+  <div class="bg-white shadow-md w-full">
+    <header
+      class="bg-green-500 bg-noise bg-gradient-to-r bg-stripes md-3 tracking-wide text-white text-lg flex justify-between py-1 px-11 shadow-sm">
+      <h4>豆瓣+图书馆查询助手</h4>
+      <div id="openOptions" class="open-options">
+        <i class="fas fa-cog fa-check-circle text-wihte-400" title="设置查询图书馆"></i>
+        <!-- Font Awesome 图标 -->
       </div>
-      <div
-        class="bg-noise bg-gradient-to-r bg-stripes bg-gray-100 p-2 text-center"
-      >
-        <span>© 2024 Copyright:</span>
-        <a class="font-semibold" href="http://www.navy81.com">无理数</a>
-      </div>
+    </header>
+    <div class="container" style="height: 80px">
+      <div style="height: 20px"></div>
+      <div id="provinceList" class="text-xl grid place-items-center"></div>
     </div>
+    <div class="bg-noise bg-gradient-to-r bg-stripes bg-gray-100 p-2 text-center">
+      <span>© 2024 Copyright:</span>
+      <a class="font-semibold" href="http://www.navy81.com">无理数</a>
+    </div>
+  </div>
 
-    <script src="provinces.mjs" type="module"></script>
-    <script src="popup.mjs" type="module"></script>
-  </body>
+  <script src="provinces.mjs" type="module"></script>
+  <script src="popup.mjs" type="module"></script>
+</body>
+
 </html>
