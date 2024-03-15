@@ -1,26 +1,3 @@
-function showErrorMessage(selectedProvinceName, book) {
-  let div = document.createElement("div");
-  div.id = "douban-hlj-lib";
-  div.style.padding = "15px 10px";
-  div.style.backgroundColor = "#F6F6F2";
-  div.style.margin = "20px auto";
-  let componentTitle = document.createElement("h2");
-  componentTitle.innerHTML =
-    "<span>" +
-    selectedProvinceName +
-    "图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span>";
-  componentTitle.style.fontSize = "15px";
-  div.append(componentTitle);
-  let div1 = document.createElement("div");
-  div1.style.width = "130px";
-  div1.style.display = "inline-block";
-  div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${book}`;
-  div.append(div1);
-
-  let element = document.querySelector(".aside");
-
-  element.insertBefore(div, element.firstChild);
-}
 
 function delete_div() {
   let div = document.getElementById("douban-hlj-lib");
@@ -45,17 +22,17 @@ chrome.runtime.sendMessage(
     const isbn = /\d{13}/.exec($("#info").html())[0];
     const bookRecnoUrl = "https://www.navy81.com/jilin";
     try {
-      showErrorMessage(selectedProvinceName, "正在查询馆藏图书....");
+      initDivElement(selectedProvinceName, "sk");
       $.post(
         bookRecnoUrl,
         JSON.stringify({ isbn: isbn, key }),
         function (responseData) {
           if (responseData["msg"] === "nobook") {
             delete_div();
-            showErrorMessage(selectedProvinceName, "暂无此图书");
+            initDivElement(selectedProvinceName,"nk");
           } else {
             delete_div();
-            initDivElement(responseData, selectedProvinceName);
+            initDivElement(selectedProvinceName,responseData);
           }
         }
       );
@@ -65,62 +42,80 @@ chrome.runtime.sendMessage(
   }
 );
 
-function initDivElement(book, selectedProvinceName) {
-  let div = document.createElement("div");
+function initDivElement(selectedProvinceName, book) {
+  const searchbook = "正在查询馆藏图书....";
+  const nobook = "暂无此图书";
+
+  const div = document.createElement("div");
   div.id = "douban-hlj-lib";
   div.style.padding = "15px 10px";
   div.style.backgroundColor = "#F6F6F2";
   div.style.margin = "20px auto";
-  let componentTitle = document.createElement("h2");
-  componentTitle.innerHTML =
-    "<span>" +
-    selectedProvinceName +
-    "图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span>";
+
+  const componentTitle = document.createElement("h2");
+  componentTitle.innerHTML = `<span>${selectedProvinceName}图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span>`;
   componentTitle.style.fontSize = "15px";
-  div.append(componentTitle);
-  let ul = document.createElement("ul");
-  ul.id = "douban-hlj-lib-list";
+  div.appendChild(componentTitle);
 
-  div.append(ul);
+  let content = '';
 
-  for (let i = 0; i < book.length; i++) {
-    let li = document.createElement("li");
-    li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
-    li.style.margin = "12px auto";
-    let stat = book[i]["loanableCount"] > 0 ? "在馆" : "借出";
-    // li.innerHTML = `<div style="width:120px;display: inline-block;"> ${book[i]["curlocalName"]}</div>
-    //      <div style="width:90px;display: inline-block;">${book[i]["callno"]} </div>
-    //      <div style="width:50px;display: inline-block;">${stat} ${book[i]["loanableCount"]}/${book[i]["copycount"]}</div>`;
-    //    li.innerHTML = ` ${book[i]["馆藏地"]}
-    //           ${book[i]["索书号"]}
-    //           ${book[i]["书刊状态"]} `
-    // <div style="width:50px;display: inline-block;">${stat} ${book[i]["loanableCount"]}/${book[i]["copycount"]}</div>`;
-    let div1 = document.createElement("div");
+  if (book === "sk") {
+    const div1 = document.createElement("div");
     div1.style.width = "130px";
     div1.style.display = "inline-block";
-    div1.textContent = book[i]["curlocalName"];
+    div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${searchbook}`;
+    content = div1;
+  } else if (book === "nk") {
+    const div1 = document.createElement("div");
+    div1.style.width = "130px";
+    div1.style.display = "inline-block";
+    div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${nobook}`;
+    content = div1;
+  } else {
+    const ul = document.createElement("ul");
+    ul.id = "douban-hlj-lib-list";
 
-    let div2 = document.createElement("div");
-    div2.style.width = "90px";
-    div2.style.display = "inline-block";
-    div2.textContent = book[i]["callno"]
-    let div3 = document.createElement("div");
+    book.forEach(item => {
+      const li = document.createElement("li");
+      li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
+      li.style.margin = "12px auto";
+      const stat = item.loanableCount > 0 ? "在馆" : "借出";
 
-    div3.style.width = "60px";
-    div3.style.display = "inline-block";
-    div3.textContent = `${book[i]["loanableCount"]}/${book[i]["copycount"]} ${stat}`;
+      const div1 = document.createElement("div");
+      div1.style.width = "130px";
+      div1.style.display = "inline-block";
+      div1.textContent = item.curlocalName;
 
-    li.appendChild(div1);
-    li.appendChild(div2);
-    li.appendChild(div3);
+      const div2 = document.createElement("div");
+      div2.style.width = "90px";
+      div2.style.display = "inline-block";
+      div2.textContent = item.callno;
+
+      const div3 = document.createElement("div");
+      div3.style.width = "60px";
+      div3.style.display = "inline-block";
+      div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
+
+      li.appendChild(div1);
+      li.appendChild(div2);
+      li.appendChild(div3);
+      ul.appendChild(li);
+    });
+
+    const li = document.createElement("li");
+    li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
+    li.style.margin = "-5px auto";
+    li.style.float = "right";
+    li.textContent = `豆瓣+图书馆查询助手`;
     ul.appendChild(li);
+
+    content = ul;
   }
-  let li = document.createElement("li");
-  li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
-  li.style.margin = "-5px auto";
-  li.style.float = "right";
-  li.textContent = `豆瓣+图书馆查询助手`;
-  ul.appendChild(li);
-  let element = document.querySelector(".aside");
+
+  div.appendChild(content);
+
+  const element = document.querySelector(".aside");
   element.insertBefore(div, element.firstChild);
 }
+
+
