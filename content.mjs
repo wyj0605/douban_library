@@ -43,6 +43,9 @@ chrome.runtime.sendMessage(
 );
 
 function initDivElement(selectedProvinceName, book) {
+
+  //sk 代表正在查找图书 
+  //nk 代表没有此图书
   const searchbook = "正在查询馆藏图书....";
   const nobook = "暂无此图书";
 
@@ -106,7 +109,7 @@ function initDivElement(selectedProvinceName, book) {
     li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
     li.style.margin = "-5px auto";
     li.style.float = "right";
-    li.textContent = `豆瓣+图书馆查询助手`;
+    li.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
     ul.appendChild(li);
 
     content = ul;
