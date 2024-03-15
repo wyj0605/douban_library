@@ -12,10 +12,11 @@ chrome.runtime.sendMessage(
   function (response) {
     console.log("Received province status:", response.provinceStatus);
     // 确定选择的省份信息
-    const selectedProvinceCode = Object.keys(response.provinceStatus)[0]; // 假设只有一个省份被选择
+    const selectedProvinceCode = Object.keys(response.provinceStatus)[0];
+     // 假设只有一个省份被选择
     const selectedProvince = provinces.find(
       (province) => province.code === selectedProvinceCode
-    );
+    ) ;
     selectedProvinceName = selectedProvince.name;
     let key = { code: response.provinceStatus };
     console.log(key);
