@@ -21,7 +21,7 @@ function getProvinceStatusAndRender(provinceList) {
             const selectedProvince = provinces.find(
                 (province) => province.code === selectedProvinceCode
             );
-            const selectedProvinceName = selectedProvince ? selectedProvince.name : "请先选择图书馆";
+            const selectedProvinceName = selectedProvince ? selectedProvince.name : "请先选择";
 
             renderProvinceListItem(selectedProvinceName, provinceList);
         }
