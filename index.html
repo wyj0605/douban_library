@@ -7,24 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
 
-  <style>
-    .container {
-      display: flex;
-      justify-content: space-between;
-    }
-    .text-column {
-      flex: 1;
-      margin-right: 20px;
-    }
-    .image-column {
-      flex: 1;
-    }
-    .main {
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.993) 40%, transparent 50%), url('20240314174748.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-    }
-  </style>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -55,9 +37,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
     </header> 
-    <main class="main px-4 py-12 container mx-auto px-4 py-12">
-      <div class="flex">
-        <div class="text-column">
+    <main class="main px-4 py-5 container mx-auto px-4 py-12">
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/2 text-column">
           <section class="mb-12">
             <h2 class="text-4xl font-bold text-green-800 mb-6">豆瓣+图书馆查询助手</h2>
             <div class="mt-4">
@@ -68,7 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
             <div class="text-green-800">
               支持的图书馆：
-              <div id="cityListContainer" class="grid grid-cols-5 py-2 px-6"></div>
+              <div id="cityListContainer" class="grid grid-cols-4 py-1 px-1"></div>
             </div>
           </section>
           <div class="px-6">
@@ -87,8 +69,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </a>
           </div>
         </div>
-        <div class="image-column">
-          <!-- <img src="20240314174748.png" alt="Your Image" class="w-full h-full"> -->
+        <div class="w-full md:w-1/2" >
+          <img src="1.png" alt="Your Image" class="w-full h-full">
         </div>
       </div>
     </main>
@@ -99,6 +81,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="https://github.com/wyj0605/" class="text-green-800 hover:text-white mr-4"><i class="fab fa-github"></i></a>
         <a href="https://twitter.com/wyj0605" class="text-green-800 hover:text-white mr-4"><i class="fab fa-twitter"></i></a>
         <a href="https://weibo.com/u/1473901087" class="text-green-800 hover:text-white"><i class="fab fa-weibo"></i></a>
+ 
+      </div>
+      <div class="container mx-auto px-4 flex justify-center items-center">
+        <p class="text-green-800 text-center mr-4">黑ICP备2023013962号</p>
       </div>
     </footer>
   </div>
