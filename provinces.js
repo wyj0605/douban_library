@@ -1,6 +1,6 @@
 const provinces = [
   { code: "1", name: "黑龙江省" },
-  { code: "2", name: "天津市" },
+  { code: "2", name: "山西省" },
   { code: "3", name: "湖南省" },
   { code: "4", name: "辽宁省" },
   { code: "5", name: "浙江省" },
