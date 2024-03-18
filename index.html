@@ -3,28 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name='keywords' content='图书馆查询助手 图书馆插件 浏览器插件 edge插件 chrome插件 '>
+<meta name='description' content='豆瓣+图书馆查询助手，让你在浏览豆瓣网站时，轻松查看图书馆的藏书情况。它提供了图书所在馆、编码、可借数量等信息，让你更便捷地找到需要的图书资源。省去了单独查询图书馆的步骤，让图书查询变得更高效便捷'>
   <title>豆瓣+图书馆查询助手</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
 
-  <style>
-    .container {
-      display: flex;
-      justify-content: space-between;
-    }
-    .text-column {
-      flex: 1;
-      margin-right: 20px;
-    }
-    .image-column {
-      flex: 1;
-    }
-    .main {
-      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.993) 40%, transparent 50%), url('20240314174748.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-    }
-  </style>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -55,26 +39,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
       </div>
     </header> 
-    <main class="main px-4 py-12 container mx-auto px-4 py-12">
-      <div class="flex">
-        <div class="text-column">
+    <main class="main px-4 py-5 container mx-auto px-4 py-12">
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/2 text-column">
           <section class="mb-12">
             <h2 class="text-4xl font-bold text-green-800 mb-6">豆瓣+图书馆查询助手</h2>
             <div class="mt-4">
-              <p class="text-green-800">本插件让你在浏览豆瓣网站时，轻松查看图书馆的藏书情况。
+              <p class="text-green-800">本插件让用户在浏览豆瓣网站时，轻松查看图书馆的藏书情况。
                 它提供了图书所在馆、编码、可借数量等信息，
-                让你更便捷地找到需要的图书资源。省去了单独查询图书馆的步骤，让图书查询变得更高效便捷
+                让用户更便捷地找到需要的图书资源。省去了单独查询图书馆的步骤，让图书查询变得更高效便捷
             </p>
+            <br/>
             </div>
             <div class="text-green-800">
-              支持的图书馆：
-              <div id="cityListContainer" class="grid grid-cols-5 py-2 px-6"></div>
+              <p class="text-green-800 mb-2">支持的图书馆：</p>
+              <div id="cityListContainer" class="grid grid-cols-4 py-1 px-1"></div>
             </div>
+            <p class="text-green-800 mb-2">安装方法：</p>
+            <p class="text-green-800"> 下载zip包会提示有病毒提示，属于误报，先暂时windows 安全中心实时防护功能，下载完成后再启用防护功能，解压插件安装包，edge 浏览器启用开发者模式，加载已解压的扩展程序。</p>
           </section>
+<<<<<<< HEAD
           <div class="px-6">
             <p class="text-gray-600 leading-relaxed mb-4">下载插件：</p>
             <p class="text-gray-600 leading-relaxed mb-4">还没有上传到插件中心，使用请下载压缩包，密码：navy81.com</p>
             <a href="https://www.navy81.com/douban_library.zip" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
+=======
+          <div class="px-8">
+            <p class="text-gray-600 leading-relaxed mb-2">下载插件：</p>
+           
+            <a href="https://chromewebstore.google.com/detail/%E8%B1%86%E7%93%A3+%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/ikdabfmbodafpkjkhbookfbimcjgkdnl" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
+>>>>>>> 9520e095b57179398bbb670cf738609f6193450b
               <i class="fab fa-chrome mr-2"></i>
               Chrome 网上应用店
             </a>
@@ -88,8 +82,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </a>
           </div>
         </div>
-        <div class="image-column">
-          <!-- <img src="20240314174748.png" alt="Your Image" class="w-full h-full"> -->
+        <div class="w-full md:w-1/2" >
+          <img src="web.webp" alt="Your Image" class="w-full h-full">
         </div>
       </div>
     </main>
@@ -99,7 +93,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <p class="text-green-800 text-center mr-4">Copyright &copy; 2024 无理数</p>
         <a href="https://github.com/wyj0605/" class="text-green-800 hover:text-white mr-4"><i class="fab fa-github"></i></a>
         <a href="https://twitter.com/wyj0605" class="text-green-800 hover:text-white mr-4"><i class="fab fa-twitter"></i></a>
-        <a href="https://weibo.com/u/1473901087" class="text-green-800 hover:text-white"><i class="fab fa-weibo"></i></a>
+      </div>
+      <div class="container mx-auto px-4 flex justify-center items-center">
+        <p class="text-green-800 text-center mr-4">黑ICP备2023013962号</p>
       </div>
     </footer>
   </div>
