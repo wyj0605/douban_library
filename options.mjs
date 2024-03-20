@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         const provinceStatus = {};
         provinceStatus[code] = true;
-        chrome.storage.sync.set(provinceStatus, function () {
+        chrome.storage.local.set(provinceStatus, function () {
           console.log(`Province ${code} status saved.`);
         });
       } else {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // 读取之前保存的省份状态，并将选中状态应用到划动开关列表中
-  chrome.storage.sync.get(null, function (items) {
+  chrome.storage.local.get(null, function (items) {
     for (const code in items) {
       const isChecked = items[code];
       if (isChecked) {
