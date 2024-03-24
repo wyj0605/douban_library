@@ -85,11 +85,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="https://twitter.com/wyj0605" class="mr-4 text-green-800 hover:text-white"><i class="fab fa-twitter"></i></a>
       </div>
       <div class="container flex items-center justify-center px-4 mx-auto">
-        <p class="mr-4 text-center text-green-800">黑ICP备2023013962号</p>
+        <p class="mr-4 text-center text-green-800" id="pageViews"></p>
       </div>
     </footer>
   </div>
 <script src="provinces.js" ></script> 
+<script>
+  fetch('/jilin_lib_count')
+      .then(response => response.json())
+      .then(data => {
+          document.getElementById('pageViews').textContent = '累计查询图书：' + data.page_views + ' 次';
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+</script>
 <script>
 provinces.forEach(province => {
   const provinceName = province.name;
