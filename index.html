@@ -32,18 +32,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <body>
   <div style="display:none;"><img src="300.png" alt=""></div>
   <div class="bg-white">
-    <header class=" bg-gradient-to-r from-green-600 via-green-500 to-green-400  bg-noise bg-gradient-to-r bg-stripes py-2">
-      <div class="container mx-auto px-4 py-2">
-        <div class="flex justify-between items-center">
-          <a href="/" class="text-white font-bold flex items-center"><i class="fa fa-book mr-2"></i>豆瓣+图书馆查询助手</a>
+    <header class="py-2 bg-gradient-to-r from-green-600 via-green-500 to-green-400 bg-noise bg-stripes">
+      <div class="container px-4 py-2 mx-auto">
+        <div class="flex items-center justify-between">
+          <a href="/" class="flex items-center font-bold text-white"><i class="mr-2 fa fa-book"></i>豆瓣+图书馆查询助手</a>
         </div>
       </div>
     </header> 
-    <main class="main px-4 py-5 container mx-auto px-4 py-12">
+    <main class="container px-4 py-5 py-12 mx-auto main">
       <div class="flex flex-wrap">
         <div class="w-full md:w-1/2 text-column">
           <section class="mb-12">
-            <h2 class="text-4xl font-bold text-green-800 mb-6">豆瓣+图书馆查询助手</h2>
+            <h2 class="mb-6 text-4xl font-bold text-green-800">豆瓣+图书馆查询助手</h2>
             <div class="mt-4">
               <p class="text-green-800">本插件让用户在浏览豆瓣网站时，轻松查看图书馆的藏书情况。
                 它提供了图书所在馆、编码、可借数量等信息，
@@ -52,46 +52,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <br/>
             </div>
             <div class="text-green-800">
-              <p class="text-green-800 mb-2">支持的图书馆：</p>
-              <div id="cityListContainer" class="grid grid-cols-4 py-1 px-1"></div>
+              <p class="mb-2 text-green-800">支持的图书馆：</p>
+              <div id="cityListContainer" class="grid grid-cols-4 px-1 py-1"></div>
             </div>
-            <p class="text-green-800 mb-2">安装方法：</p>
-            <p class="text-green-800">edge 浏览器下载zip包会提示有病毒提示，属于误报，先暂时windows 安全中心实时防护功能，下载完成后再启用防护功能，解压插件安装包，edge 浏览器启用开发者模式，加载已解压的扩展程序。</p>
           </section>
           <div class="px-8">
-            <p class="text-gray-600 leading-relaxed mb-2">下载插件：</p>
-            <a href="https://chromewebstore.google.com/detail/%E8%B1%86%E7%93%A3+%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/ikdabfmbodafpkjkhbookfbimcjgkdnl" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
-              <i class="fab fa-chrome mr-2"></i>
+            <p class="mb-2 leading-relaxed text-gray-600">下载插件：</p>
+            <a href="https://chromewebstore.google.com/detail/%E8%B1%86%E7%93%A3+%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/ikdabfmbodafpkjkhbookfbimcjgkdnl" class="flex items-center inline-block px-4 py-2 mb-4 font-bold text-white bg-green-600 rounded-full hover:bg-green-500">
+              <i class="mr-2 fab fa-chrome"></i>
               Chrome 网上应用店
             </a>
-            <a href="https://www.navy81.com/douban_library.zip" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
-              <i class="fab fa-edge mr-2"></i>
+            <a href="https://microsoftedge.microsoft.com/addons/detail/%E8%B1%86%E7%93%A3%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/epigeglfefennfmicnckmolnoiiomgfm" class="flex items-center inline-block px-4 py-2 mb-4 font-bold text-white bg-green-600 rounded-full hover:bg-green-500">
+              <i class="mr-2 fab fa-edge"></i>
               Microsoft Edge 插件中心
             </a>
-            <a href="https://addons.mozilla.org/zh-CN/firefox/addon/%E8%B1%86%E7%93%A3-%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center mb-4">
-              <i class="fab fa-firefox mr-2"></i>
+            <a href="https://addons.mozilla.org/zh-CN/firefox/addon/%E8%B1%86%E7%93%A3-%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search" class="flex items-center inline-block px-4 py-2 mb-4 font-bold text-white bg-green-600 rounded-full hover:bg-green-500">
+              <i class="mr-2 fab fa-firefox"></i>
               Firefox 插件
             </a>
           </div>
         </div>
         <div class="w-full md:w-1/2" >
-          <img src="web.webp" alt="Your Image" class="w-full h-full object-fill">
+          <img src="web.webp" alt="Your Image" class="object-fill w-full h-full">
         </div>
       </div>
     </main>
     
-    <footer class=" py-10">
-      <div class="container mx-auto px-4 flex justify-center items-center">
-        <p class="text-green-800 text-center mr-4">Copyright &copy; 2024 无理数</p>
-        <a href="https://github.com/wyj0605/" class="text-green-800 hover:text-white mr-4"><i class="fab fa-github"></i></a>
-        <a href="https://twitter.com/wyj0605" class="text-green-800 hover:text-white mr-4"><i class="fab fa-twitter"></i></a>
+    <footer class="py-10 ">
+      <div class="container flex items-center justify-center px-4 mx-auto">
+        <p class="mr-4 text-center text-green-800">Copyright &copy; 2024 无理数</p>
+        <a href="https://github.com/wyj0605/" class="mr-4 text-green-800 hover:text-white"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com/wyj0605" class="mr-4 text-green-800 hover:text-white"><i class="fab fa-twitter"></i></a>
       </div>
-      <div class="container mx-auto px-4 flex justify-center items-center">
-        <p class="text-green-800 text-center mr-4">黑ICP备2023013962号</p>
+      <div class="container flex items-center justify-center px-4 mx-auto">
+        <p class="mr-4 text-center text-green-800" id="pageViews"></p>
       </div>
     </footer>
   </div>
 <script src="provinces.js" ></script> 
+<script>
+  // 使用 Fetch API 获取页面访问量
+  fetch('/jilin_lib_count')
+      .then(response => response.json())
+      .then(data => {
+          // 将页面访问量展示在页面上
+          document.getElementById('pageViews').textContent = '累计查询图书：' + data.page_views + ' 次';
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+</script>
 <script>
 provinces.forEach(province => {
   const provinceName = province.name;
