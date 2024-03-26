@@ -1,5 +1,5 @@
 const provinces = [
-  { code: "1", name: "黑龙江省" },
+  { code: "1", name: "黑龙江" },
   { code: "2", name: "山西省" },
   { code: "3", name: "湖南省" },
   { code: "4", name: "辽宁省" },
@@ -26,7 +26,7 @@ const provinces = [
   { code: "25", name: "绍兴市" },
   { code: "26", name: "百色市" },
   { code: "27", name: "珠海市" },
-  { code: "28", name: "张家港市" },
+  { code: "28", name: "张家港" },
   { code: "29", name: "长沙市" },
   { code: "30", name: "晋城市" },
   { code: "31", name: "中山市" },
@@ -38,5 +38,6 @@ const provinces = [
   { code: "37", name: "深圳市" },
   { code: "38", name: "上海浦东" },
   { code: "39", name: "福泉市" },
-  { code: "40", name: "来宾市" }
+  { code: "40", name: "来宾市" },
+  { code: "41", name: "重庆市" }
 ];

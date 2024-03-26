@@ -98,7 +98,14 @@ function initDivElement(selectedProvinceName, book) {
       const div3 = document.createElement("div");
       div3.style.width = "60px";
       div3.style.display = "inline-block";
-      div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
+      
+      if (item.loanableCount !== null && item.loanableCount !== undefined) {
+        div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
+    } else {
+        div3.textContent = `${item.status} `;
+    }
+      
+     // div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
 
       li.appendChild(div1);
       li.appendChild(div2);
