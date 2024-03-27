@@ -39,5 +39,6 @@ const provinces = [
   { code: "38", name: "上海浦东" },
   { code: "39", name: "福泉市" },
   { code: "40", name: "来宾市" },
-  { code: "41", name: "重庆市" }
+  { code: "41", name: "重庆市" },
+  { code: "42", name: "广西壮族自治区" }
 ];
