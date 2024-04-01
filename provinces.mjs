@@ -40,7 +40,8 @@ const provinces = [
   { code: "39", name: "福泉市" },
   { code: "40", name: "来宾市" },
   { code: "41", name: "重庆市" },
-  { code: "42", name: "广西壮族自治区" }
+  { code: "42", name: "广西壮族自治区" },
+  { code: "43", name: "呼伦贝尔市" },
 ];
   
 export default provinces;
