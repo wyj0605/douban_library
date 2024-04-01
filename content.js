@@ -22,6 +22,7 @@ chrome.runtime.sendMessage(
     console.log(key);
     const isbn = /\d{13}/.exec($("#info").html())[0];
     const bookRecnoUrl = "https://www.navy81.com/jilin";
+    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       initDivElement(selectedProvinceName, "sk");
       $.post(
@@ -99,11 +100,17 @@ function initDivElement(selectedProvinceName, book) {
       div3.style.width = "60px";
       div3.style.display = "inline-block";
       
-      if (item.loanableCount !== null && item.loanableCount !== undefined) {
-        div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
-    } else {
-        div3.textContent = `${item.status} `;
-    }
+      if (item.state) {
+        console.log(item.state);
+        div3.textContent = `   ${item.state} `;
+      }else{
+        if (item.loanableCount !== null && item.loanableCount !== undefined) {
+          div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
+      } else {
+          div3.textContent = `${item.status} `;
+      }
+      }
+
       
      // div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
 
