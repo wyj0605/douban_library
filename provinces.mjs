@@ -43,6 +43,8 @@ const provinces = [
   { code: "42", name: "广西壮族自治区" },
   { code: "43", name: "呼伦贝尔市" },
   { code: "44", name: "无锡市" },
+  { code: "45", name: "南京市" },
+  { code: "46", name: "扬州市" },
 ];
   
 export default provinces;
