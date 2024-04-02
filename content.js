@@ -1,4 +1,3 @@
-
 function delete_div() {
   let div = document.getElementById("douban-hlj-lib");
   if (div) {
@@ -11,12 +10,10 @@ chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
     console.log("Received province status:", response.provinceStatus);
-    // 确定选择的省份信息
     const selectedProvinceCode = Object.keys(response.provinceStatus)[0];
-     // 假设只有一个省份被选择
     const selectedProvince = provinces.find(
       (province) => province.code === selectedProvinceCode
-    ) ;
+    );
     selectedProvinceName = selectedProvince.name;
     let key = { code: response.provinceStatus };
     console.log(key);
@@ -31,10 +28,10 @@ chrome.runtime.sendMessage(
         function (responseData) {
           if (responseData["msg"] === "nobook") {
             delete_div();
-            initDivElement(selectedProvinceName,"nk");
+            initDivElement(selectedProvinceName, "nk");
           } else {
             delete_div();
-            initDivElement(selectedProvinceName,responseData);
+            initDivElement(selectedProvinceName, responseData);
           }
         }
       );
@@ -45,12 +42,10 @@ chrome.runtime.sendMessage(
 );
 
 function initDivElement(selectedProvinceName, book) {
-
-  //sk 代表正在查找图书 
+  //sk 代表正在查找图书
   //nk 代表没有此图书
   const searchbook = "正在查询馆藏图书....";
   const nobook = "暂无此图书";
-
   const div = document.createElement("div");
   div.id = "douban-hlj-lib";
   div.style.padding = "15px 10px";
@@ -62,7 +57,7 @@ function initDivElement(selectedProvinceName, book) {
   componentTitle.style.fontSize = "15px";
   div.appendChild(componentTitle);
 
-  let content = '';
+  let content = "";
 
   if (book === "sk") {
     const div1 = document.createElement("div");
@@ -80,7 +75,7 @@ function initDivElement(selectedProvinceName, book) {
     const ul = document.createElement("ul");
     ul.id = "douban-hlj-lib-list";
 
-    book.forEach(item => {
+    book.forEach((item) => {
       const li = document.createElement("li");
       li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
       li.style.margin = "12px auto";
@@ -99,20 +94,19 @@ function initDivElement(selectedProvinceName, book) {
       const div3 = document.createElement("div");
       div3.style.width = "60px";
       div3.style.display = "inline-block";
-      
+
       if (item.state) {
         console.log(item.state);
         div3.textContent = `   ${item.state} `;
-      }else{
+      } else {
         if (item.loanableCount !== null && item.loanableCount !== undefined) {
           div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
-      } else {
+        } else {
           div3.textContent = `${item.status} `;
-      }
+        }
       }
 
-      
-     // div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
+      // div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
 
       li.appendChild(div1);
       li.appendChild(div2);
@@ -126,14 +120,10 @@ function initDivElement(selectedProvinceName, book) {
     li.style.float = "right";
     li.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
     ul.appendChild(li);
-
     content = ul;
   }
 
   div.appendChild(content);
-
   const element = document.querySelector(".aside");
   element.insertBefore(div, element.firstChild);
 }
-
-
