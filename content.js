@@ -9,7 +9,7 @@ function delete_div() {
 chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
-    console.log("Received province status:", response.provinceStatus);
+   // console.log("Received province status:", response.provinceStatus);
     const selectedProvinceCode = Object.keys(response.provinceStatus)[0];
     const selectedProvince = provinces.find(
       (province) => province.code === selectedProvinceCode
@@ -101,8 +101,6 @@ function initDivElement(selectedProvinceName, book) {
           div3.textContent = `${item.status} `;
         }
       }
-
-      // div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
 
       li.appendChild(div1);
       li.appendChild(div2);
