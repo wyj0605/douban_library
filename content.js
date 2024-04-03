@@ -61,14 +61,10 @@ function initDivElement(selectedProvinceName, book) {
 
   if (book === "sk") {
     const div1 = document.createElement("div");
-    div1.style.width = "130px";
-    div1.style.display = "inline-block";
     div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${searchbook}`;
     content = div1;
   } else if (book === "nk") {
     const div1 = document.createElement("div");
-    div1.style.width = "130px";
-    div1.style.display = "inline-block";
     div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${nobook}`;
     content = div1;
   } else {
