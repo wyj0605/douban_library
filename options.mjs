@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     item.classList.add("flex", "items-center", "py-1");
     item.innerHTML = `
             <label class="flex items-center cursor-pointer">
-                <input type="checkbox" name="${province.code}" class="form-checkbox mr-2 checked:bg-gray-900 checked:border-transparent checked:ring-2 checked:ring-offset-2 checked:ring-blue-500 h-4 w-4 ">
+                <input type="checkbox" name="${province.code}" class="form-checkbox mr-2 checked:bg-gray-900 checked:border-transparent checked:ring-2 checked:ring-offset-2 checked:ring-blue-500 h-6 w-6 ">
                 <span>${province.name}</span>
             </label>
         `;
