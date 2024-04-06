@@ -56,6 +56,7 @@ const provinces = [
   { code: "55", name: "海口市" },
   { code: "56", name: "三亚市" },
   { code: "57", name: "新疆" },
+  { code: "58", name: "上海市" },
 ];
   
 export default provinces;
