@@ -57,6 +57,8 @@ const provinces = [
   { code: "56", name: "三亚市" },
   { code: "57", name: "新疆" },
   { code: "58", name: "上海市" },
+  { code: "59", name: "青海省" },
+  { code: "60", name: "山东省" },
 ];
   
 export default provinces;
