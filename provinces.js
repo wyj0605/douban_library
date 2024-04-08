@@ -59,5 +59,7 @@ const provinces = [
   { code: "58", name: "上海市" },
   { code: "59", name: "青海省" },
   { code: "60", name: "山东省" },
+  { code: "61", name: "河北省" },
+  { code: "62", name: "陕西省" },
 ];
   
