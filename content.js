@@ -91,16 +91,16 @@ function initDivElement(selectedProvinceName, book) {
       div3.style.width = "60px";
       div3.style.display = "inline-block";
 
-      if (item.state) {
-        console.log(item.state);
-        div3.textContent = `   ${item.state} `;
-      } else {
+      // if (item.state) {
+      //   console.log(item.state);
+      //   div3.textContent = `   ${item.state} `;
+      // } else {
         if (item.loanableCount !== null && item.loanableCount !== undefined) {
           div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
         } else {
-          div3.textContent = `${item.status} `;
+          div3.textContent = `   ${item.status} `;
         }
-      }
+     // }
 
       li.appendChild(div1);
       li.appendChild(div2);
