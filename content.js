@@ -2,36 +2,34 @@ function delete_div() {
   let div = document.getElementById("douban-hlj-lib");
   if (div) {
     div.parentNode.removeChild(div);
-  } else {
-    console.log("要删除的 div 元素不存在。");
-  }
+  } 
 }
 chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
-   // console.log("Received province status:", response.provinceStatus);
-    const selectedProvinceCode = Object.keys(response.provinceStatus)[0];
+
+    const selectcode = Object.keys(response.provinceStatus)[0];
     const selectedProvince = provinces.find(
-      (province) => province.code === selectedProvinceCode
+      (province) => province.code === selectcode
     );
-    selectedProvinceName = selectedProvince.name;
+    selectname = selectedProvince.name;
     let key = { code: response.provinceStatus };
     console.log(key);
     const isbn = /\d{13}/.exec($("#info").html())[0];
     const bookRecnoUrl = "https://www.navy81.com/jilin";
     //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
-      initDivElement(selectedProvinceName, "sk");
+      initDivElement(selectname, "sk");
       $.post(
         bookRecnoUrl,
         JSON.stringify({ isbn: isbn, key }),
         function (responseData) {
           if (responseData["msg"] === "nobook") {
             delete_div();
-            initDivElement(selectedProvinceName, "nk");
+            initDivElement(selectname, "nk");
           } else {
             delete_div();
-            initDivElement(selectedProvinceName, responseData);
+            initDivElement(selectname, responseData);
           }
         }
       );
@@ -41,7 +39,7 @@ chrome.runtime.sendMessage(
   }
 );
 
-function initDivElement(selectedProvinceName, book) {
+function initDivElement(selectname, book) {
   //sk 代表正在查找图书
   //nk 代表没有此图书
   const searchbook = "正在查询馆藏图书....";
@@ -50,13 +48,13 @@ function initDivElement(selectedProvinceName, book) {
   div.id = "douban-hlj-lib";
   div.style.padding = "15px 10px";
   div.style.backgroundColor = "#F6F6F2";
-  div.style.margin = "20px auto";
+  div.style.marginBottom  = "20px";
+  div.style.borderRadius = "5px";
 
   const componentTitle = document.createElement("h2");
-  componentTitle.innerHTML = `<span>${selectedProvinceName}图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span>`;
+  componentTitle.innerHTML = `<b><span>${selectname}图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span></b>`;
   componentTitle.style.fontSize = "15px";
   div.appendChild(componentTitle);
-
   let content = "";
 
   if (book === "sk") {
@@ -91,33 +89,24 @@ function initDivElement(selectedProvinceName, book) {
       div3.style.width = "60px";
       div3.style.display = "inline-block";
 
-      // if (item.state) {
-      //   console.log(item.state);
-      //   div3.textContent = `   ${item.state} `;
-      // } else {
         if (item.loanableCount !== null && item.loanableCount !== undefined) {
           div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
         } else {
           div3.textContent = `   ${item.status} `;
         }
-     // }
-
       li.appendChild(div1);
       li.appendChild(div2);
       li.appendChild(div3);
       ul.appendChild(li);
     });
-
-    const li = document.createElement("li");
-    li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
-    li.style.margin = "-5px auto";
-    li.style.float = "right";
-    li.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
-    ul.appendChild(li);
     content = ul;
   }
+  const div1 = document.createElement("div");
+  div1.style.textAlign  = "right";
+  div1.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
 
   div.appendChild(content);
+  div.appendChild(div1);
   const element = document.querySelector(".aside");
   element.insertBefore(div, element.firstChild);
 }
