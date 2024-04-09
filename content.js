@@ -60,10 +60,12 @@ function initDivElement(selectname, book) {
   if (book === "sk") {
     const div1 = document.createElement("div");
     div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${searchbook}`;
+    div1.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
     content = div1;
   } else if (book === "nk") {
     const div1 = document.createElement("div");
     div1.innerHTML = `<i class="fas fa-info-circle text-green-500"></i> ${nobook}`;
+    div1.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
     content = div1;
   } else {
     const ul = document.createElement("ul");
