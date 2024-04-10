@@ -47,7 +47,6 @@ const provinces = [
   { code: "73", name: "昆明市" },
   { code: "47", name: "哈尔滨市" },
   { code: "56", name: "三亚市" },
-  { code: "32", name: "温州市" },
   { code: "44", name: "无锡市" },
   { code: "48", name: "扬州市" },
   { code: "50", name: "太原市" },
@@ -56,6 +55,9 @@ const provinces = [
   { code: "43", name: "呼伦贝尔市" },
   { code: "51", name: "呼和浩特市" },
   { code: "54", name: "南宁市" },
+  { code: "74", name: "宁夏市" },
+  { code: "75", name: "天津市" },
+
   // { code: "39", name: "福泉市" },
   // { code: "40", name: "来宾市" },
   // { code: "49", name: "镇江市" },
