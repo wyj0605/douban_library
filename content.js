@@ -16,8 +16,8 @@ chrome.runtime.sendMessage(
     let key = { code: response.provinceStatus };
     console.log(key);
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    //const bookRecnoUrl = "https://www.navy81.com/jilin";
-    const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
+    const bookRecnoUrl = "https://www.navy81.com/jilin";
+    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       initDivElement(selectname, "sk");
       $.post(
@@ -85,7 +85,8 @@ function initDivElement(selectname, book) {
       const div2 = document.createElement("div");
       div2.style.width = "90px";
       div2.style.display = "inline-block";
-      div2.style.display.textAlign = "center";
+      div2.style.whiteSpace = "normal";
+      //div2.style.display.textAlign = "center";
       div2.textContent = item.callno;
 
       const div3 = document.createElement("div");
