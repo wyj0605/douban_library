@@ -97,6 +97,9 @@ function initDivElement(selectname, book) {
           div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
         } else {
           div3.textContent = `   ${item.status} `;
+          div3.style.width = "60px";
+          div3.style.display = "inline-block";
+          div2.style.display.textAlign = "right";
         }
       li.appendChild(div1);
       li.appendChild(div2);

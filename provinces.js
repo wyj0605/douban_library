@@ -21,6 +21,7 @@ const provinces = [
   { code: "58", name: "上海市" },
   { code: "38", name: "上海浦东" },
   { code: "41", name: "重庆市" },
+  { code: "75", name: "天津市" },
   { code: "12", name: "成都市" },
   { code: "20", name: "广州市" },
   { code: "37", name: "深圳市" },
@@ -37,8 +38,7 @@ const provinces = [
   { code: "66", name: "秦皇岛市" },
   { code: "16", name: "杭州市" },
   { code: "69", name: "苏州市" },
-  { code: "70", name: "温州市" },
-  { code: "45", name: "南京市" },
+  { code: "45", name: "南京金陵" },
   { code: "46", name: "西安市" },
   { code: "18", name: "厦门市" },
   { code: "29", name: "长沙市" },
@@ -56,7 +56,8 @@ const provinces = [
   { code: "51", name: "呼和浩特市" },
   { code: "54", name: "南宁市" },
   { code: "74", name: "宁夏市" },
-  { code: "75", name: "天津市" },
+  { code: "76", name: "广东省立中山" },
+
 
   // { code: "39", name: "福泉市" },
   // { code: "40", name: "来宾市" },
