@@ -44,7 +44,6 @@ const provinces = [
   { code: "18", name: "厦门市" },
   { code: "29", name: "长沙市" },
   { code: "71", name: "合肥市" },
-
   { code: "73", name: "昆明市" },
   { code: "47", name: "哈尔滨市" },
   { code: "56", name: "三亚市" },
