@@ -2,12 +2,11 @@ function delete_div() {
   let div = document.getElementById("douban-hlj-lib");
   if (div) {
     div.parentNode.removeChild(div);
-  } 
+  }
 }
 chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
-
     const selectcode = Object.keys(response.provinceStatus)[0];
     const selectedProvince = provinces.find(
       (province) => province.code === selectcode
@@ -16,8 +15,8 @@ chrome.runtime.sendMessage(
     let key = { code: response.provinceStatus };
     console.log(key);
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    const bookRecnoUrl = "https://www.navy81.com/jilin";
-    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
+    //const bookRecnoUrl = "https://www.navy81.com/jilin";
+    const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       initDivElement(selectname, "sk");
       $.post(
@@ -48,7 +47,7 @@ function initDivElement(selectname, book) {
   div.id = "douban-hlj-lib";
   div.style.padding = "15px 10px";
   div.style.backgroundColor = "#F6F6F2";
-  div.style.marginBottom  = "20px";
+  div.style.marginBottom = "20px";
   div.style.borderRadius = "5px";
 
   const componentTitle = document.createElement("h2");
@@ -85,23 +84,26 @@ function initDivElement(selectname, book) {
       const div2 = document.createElement("div");
       div2.style.width = "90px";
       div2.style.display = "inline-block";
-      div2.style.whiteSpace = "normal";
-      //div2.style.display.textAlign = "center";
       div2.textContent = item.callno;
 
       const div3 = document.createElement("div");
       div3.style.width = "60px";
       div3.style.display = "inline-block";
-      div2.style.display.textAlign = "right";
+      div3.style.display.textAlign = "right";
 
-        if (item.loanableCount !== null && item.loanableCount !== undefined) {
-          div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
-        } else {
-          div3.textContent = `   ${item.status} `;
-          div3.style.width = "60px";
-          div3.style.display = "inline-block";
-          div2.style.display.textAlign = "right";
-        }
+      if (item.loanableCount !== null && item.loanableCount !== undefined) {
+        div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
+      } else {
+        div3.textContent = `   ${item.status} `;
+        div3.style.width = "60px";
+        div3.style.display = "inline-block";
+        div2.style.display.textAlign = "right";
+      }
+      div3.title =
+        item.retudate !== null && item.retudate !== undefined
+          ? `还书日期：${item.retudate} `
+          : "";
+
       li.appendChild(div1);
       li.appendChild(div2);
       li.appendChild(div3);
@@ -110,7 +112,7 @@ function initDivElement(selectname, book) {
     content = ul;
   }
   const div1 = document.createElement("div");
-  div1.style.textAlign  = "right";
+  div1.style.textAlign = "right";
   div1.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
 
   div.appendChild(content);

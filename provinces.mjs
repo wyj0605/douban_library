@@ -52,10 +52,10 @@ const provinces = [
   { code: "50", name: "太原市" },
   { code: "52", name: "福州市" },
   { code: "55", name: "海口市" },
-  { code: "74", name: "宁夏市" },
   { code: "43", name: "呼伦贝尔市" },
   { code: "51", name: "呼和浩特市" },
   { code: "54", name: "南宁市" },
+  { code: "74", name: "宁夏回族自治区" },
   { code: "72", name: "黄石市" },
 ];
   
