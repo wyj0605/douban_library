@@ -15,8 +15,8 @@ chrome.runtime.sendMessage(
     let key = { code: response.provinceStatus };
     console.log(key);
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    //const bookRecnoUrl = "https://www.navy81.com/jilin";
-    const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
+    const bookRecnoUrl = "https://www.navy81.com/jilin";
+    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       initDivElement(selectname, "sk");
       $.post(

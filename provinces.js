@@ -55,7 +55,7 @@ const provinces = [
   { code: "43", name: "呼伦贝尔市" },
   { code: "51", name: "呼和浩特市" },
   { code: "54", name: "南宁市" },
-  { code: "74", name: "宁夏回族自治区图书馆" },
+  { code: "74", name: "宁夏回族自治区" },
   { code: "72", name: "黄石市" },
 
   // { code: "39", name: "福泉市" },
