@@ -37,7 +37,7 @@ chrome.runtime.sendMessage(
     }
   }
 );
-
+ 
 function initDivElement(selectname, book) {
   //sk 代表正在查找图书
   //nk 代表没有此图书
