@@ -57,6 +57,7 @@ const provinces = [
   { code: "54", name: "南宁市" },
   { code: "74", name: "宁夏回族自治区" },
   { code: "72", name: "黄石市" },
+  { code: "77", name: "首都" },
 ];
   
   
