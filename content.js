@@ -7,20 +7,6 @@ function delete_div() {
 chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
-<<<<<<< HEAD
-    const selectcode = Object.keys(response.provinceStatus)[0];
-    const selectedProvince = provinces.find(
-      (province) => province.code === selectcode
-    );
-    selectname = selectedProvince.name;
-    let key = { code: response.provinceStatus };
-    console.log(key);
-    const isbn = /\d{13}/.exec($("#info").html())[0];
-    //const bookRecnoUrl = "https://www.navy81.com/jilin";
-    const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
-    try {
-      initDivElement(selectname, "sk");
-=======
     const selectcode = Object.keys(response.provinceStatus);
     var  selectedProvince=[];
     for (let i = 0; i < selectcode.length; i++) {
@@ -37,20 +23,10 @@ chrome.runtime.sendMessage(
       for (let i = 0; i < selectcode.length; i++) {
         initDivElement(selectedProvince[i].name, "sk");
       }
->>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
       $.post(
         bookRecnoUrl,
         JSON.stringify({ isbn: isbn, key }),
         function (responseData) {
-<<<<<<< HEAD
-          if (responseData["msg"] === "nobook") {
-            delete_div();
-            initDivElement(selectname, "nk");
-          } else {
-            delete_div();
-            initDivElement(selectname, responseData);
-          }
-=======
           for (let i = 0; i < selectcode.length; i++) {
             delete_div()
           }
@@ -63,7 +39,6 @@ chrome.runtime.sendMessage(
             }
           }
   
->>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
         }
       );
     } catch (error) {
@@ -118,10 +93,7 @@ function initDivElement(selectname, book) {
       const div2 = document.createElement("div");
       div2.style.width = "90px";
       div2.style.display = "inline-block";
-<<<<<<< HEAD
-=======
       div2.style.overflowWrap = "break-word";
->>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
       div2.textContent = item.callno;
 
       const div3 = document.createElement("div");
@@ -157,8 +129,4 @@ function initDivElement(selectname, book) {
   div.appendChild(div1);
   const element = document.querySelector(".aside");
   element.insertBefore(div, element.firstChild);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
