@@ -18,6 +18,10 @@ const provinces = [
   { code: "62", name: "陕西省" },
   { code: "8", name: "湖北省" },
   { code: "63", name: "云南省" },
+<<<<<<< HEAD
+=======
+  { code: "45", name: "南京" },
+>>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
   { code: "57", name: "新疆自治区" },
   { code: "58", name: "上海市" },
   { code: "38", name: "上海浦东" },
@@ -39,7 +43,10 @@ const provinces = [
   { code: "66", name: "秦皇岛市" },
   { code: "16", name: "杭州市" },
   { code: "69", name: "苏州市" },
+<<<<<<< HEAD
   { code: "45", name: "南京金陵" },
+=======
+>>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
   { code: "46", name: "西安市" },
   { code: "18", name: "厦门市" },
   { code: "29", name: "长沙市" },
@@ -56,6 +63,7 @@ const provinces = [
   { code: "51", name: "呼和浩特市" },
   { code: "54", name: "南宁市" },
   { code: "74", name: "宁夏回族自治区" },
+<<<<<<< HEAD
   { code: "72", name: "黄石市" },
   { code: "77", name: "北京首都" },
   { code: "78", name: "河南省" },
@@ -65,11 +73,29 @@ const provinces = [
   // { code: "49", name: "镇江市" },
   // { code: "30", name: "晋城市" },
   // { code: "31", name: "中山市" },
+=======
+  { code: "77", name: "北京首都" },
+  { code: "78", name: "河南省" },
+  { code: "79", name: "南京金陵" },
+  { code: "31", name: "中山市" },
+  { code: "39", name: "福泉市" },
+  { code: "25", name: "绍兴市" },
+//{ code: "72", name: "黄石市" },
+  // 
+  // { code: "40", name: "来宾市" },
+  // { code: "49", name: "镇江市" },
+  // { code: "30", name: "晋城市" },
+  // 
+>>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
   // { code: "33", name: "莆田市" },
   // { code: "34", name: "江阴市" },
   // { code: "23", name: "铁岭市" },
   // { code: "24", name: "鄂州市" },
+<<<<<<< HEAD
   // { code: "25", name: "绍兴市" },
+=======
+  // 
+>>>>>>> 1268ba49b69ac996089da43260f0487fb8c9bc9d
   // { code: "26", name: "百色市" },
   // { code: "21", name: "鞍山市" },
   // { code: "28", name: "张家港" },
