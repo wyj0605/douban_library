@@ -62,6 +62,8 @@ const provinces = [
   { code: "31", name: "中山市" },
   { code: "39", name: "福泉市" },
   { code: "25", name: "绍兴市" },
+  { code: "80", name: "南昌市" },
+  { code: "81", name: "贵阳市" },
 ];
   
   

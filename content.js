@@ -4,6 +4,8 @@ function delete_div() {
     div.parentNode.removeChild(div);
   }
 }
+
+
 chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
