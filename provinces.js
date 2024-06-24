@@ -64,6 +64,7 @@ const provinces = [
   { code: "25", name: "绍兴市" },
   { code: "80", name: "南昌市" },
   { code: "81", name: "贵阳市" },
+  { code: "82", name: "宁波市" },
 //{ code: "72", name: "黄石市" },
   // 
   // { code: "40", name: "来宾市" },
