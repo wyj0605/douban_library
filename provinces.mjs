@@ -65,6 +65,7 @@ const provinces = [
   { code: "80", name: "南昌市" },
   { code: "81", name: "贵阳市" },
   { code: "82", name: "宁波市" },
+  { code: "83", name: "国家" },//国家图书馆
 
 ];
   
