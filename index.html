@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name='keywords' content='图书馆查询助手 图书馆插件 浏览器插件 edge插件 chrome插件 黑龙江省图书馆
 吉林省图书馆
@@ -60,9 +61,15 @@
 呼和浩特市图书馆
 南宁市图书馆
 宁夏回族自治区图书馆
-北京首都图书馆'>
+北京首都图书馆
+国家图书馆'>
 <meta name='description' content='豆瓣+图书馆查询助手，让你在浏览豆瓣网站时，轻松查看图书馆的藏书情况。它提供了图书所在馆、编码、可借数量等信息，让你更便捷地找到需要的图书资源。省去了单独查询图书馆的步骤，让图书查询变得更高效便捷'>
   <title>豆瓣+图书馆查询助手</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+  />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
 <!-- Google Tag Manager -->
@@ -131,8 +138,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <img src="img/web.png" alt="Your Image" class="object-contain w-full h-auto">
         </div>
       </div>
-    </main>
+<div id="waline"></div>
+  <script type="module">
+    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
+    init({
+      el: '#waline',
+      serverURL: 'https://msg-chi.vercel.app',
+    });
+  </script>
+
+    </main>
     
     <footer class="py-10 ">
       <div class="container flex items-center justify-center px-4 mx-auto">
@@ -168,9 +184,11 @@ provinces.forEach(province => {
   document.getElementById("cityListContainer").innerHTML += `<li>${provinceName}</li>`;
 });
 </script>
+
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5JC2D6PP"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
 </body>
 </html>
