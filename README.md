@@ -5,6 +5,18 @@
 ### 豆瓣+图书馆查询助手小程序版已上线，欢迎使用，小程序名称：我的查书助手。
 ![](https://github.com/wyj0605/douban_library/blob/main/img/qrcode.jpg?raw=true)
 
+## 支持这个项目
+### 用爱发电
+我们提供的服务是免费的，但是为了维护这个项目，我们也需要花费一些精力和服务器带宽费用。如果您觉得这个项目对你有帮助，欢迎您通过以下方式支持我们：
+
+- 通过以下二维码 一次性捐款，打赏作者一杯茶。🍵
+非常感谢！ ❤️
+
+
+| 微信 | 支付宝 |
+|:--------:|:-------:|
+| <img src="https://github.com/wyj0605/douban_library/blob/main/img/weixin.jpg?raw=true" width="200" /> | <img src="https://github.com/wyj0605/douban_library/blob/main/img/zhifubao.jpg?raw=true" width="200" /> |
+
 
 ### 同时支持两个图书馆查询接口 2024-5-13
 
