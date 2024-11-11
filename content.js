@@ -19,8 +19,8 @@ chrome.runtime.sendMessage(
     selectname = selectedProvince;
     let key = { code: response.provinceStatus };
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    //const bookRecnoUrl = "https://www.navy81.com/jilin";
-    const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
+    const bookRecnoUrl = "https://www.navy81.icu/jilin";
+    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       for (let i = 0; i < selectcode.length; i++) {
         initDivElement(selectedProvince[i].name, "sk");
