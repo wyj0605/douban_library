@@ -19,8 +19,8 @@ chrome.runtime.sendMessage(
     selectname = selectedProvince;
     let key = { code: response.provinceStatus };
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    //const bookRecnoUrl = "https://www.navy81.com/jilin";
-    const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
+    const bookRecnoUrl = "https://www.navy81.com/jilin";
+    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       for (let i = 0; i < selectcode.length; i++) {
         initDivElement(selectedProvince[i].name, "sk");
@@ -48,7 +48,11 @@ chrome.runtime.sendMessage(
     }
   }
 );
- 
+function donwload(){
+  html2canvas(document.querySelector("#douban-hlj-lib")).then(canvas => {
+    document.body.appendChild(canvas)
+});
+}
 function initDivElement(selectname, book) {
   //sk 代表正在查找图书
   //nk 代表没有此图书
@@ -125,8 +129,8 @@ function initDivElement(selectname, book) {
   }
   const div1 = document.createElement("div");
   div1.style.textAlign = "right";
+ 
   div1.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
-
   div.appendChild(content);
   div.appendChild(div1);
   const element = document.querySelector(".aside");
