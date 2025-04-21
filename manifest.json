@@ -12,7 +12,7 @@
 
   "content_scripts": [
     {
-      "js": ["content.js", "provinces.js","jquery.min.js"],
+      "js": ["content.js", "provinces.js", "jquery.min.js"],
       "matches": ["*://book.douban.com/subject/*"]
     }
   ],
