@@ -18,7 +18,7 @@ chrome.runtime.sendMessage(
     selectname = selectedProvince;
     let key = { code: response.provinceStatus };
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    const bookRecnoUrl = "https://www.navy81.com/jilin";
+    const bookRecnoUrl = "https://www.navy81.icu/jilin";
     //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
     try {
       for (let i = 0; i < selectcode.length; i++) {
@@ -127,7 +127,7 @@ function initDivElement(selectname, book) {
   const div1 = document.createElement("div");
   div1.style.textAlign = "right";
 
-  div1.innerHTML = `<a href="https://www.navy81.com/" target="_blank">豆瓣+图书馆查询助手</a>`;
+  div1.innerHTML = `<a href="https://www.navy81.icu/" target="_blank">豆瓣+图书馆查询助手</a>`;
   div.appendChild(content);
   div.appendChild(div1);
   const element = document.querySelector(".aside");
