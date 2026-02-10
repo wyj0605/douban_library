@@ -49,7 +49,8 @@
 ![功能截图1](https://github.com/wyj0605/douban_library/blob/main/img/2024-05-14_09-23-15.png?raw=true)
 
 ![功能截图2](https://github.com/wyj0605/douban_library/blob/main/img/2024-4-24.png?raw=true)
-
+![功能截图3](./img/截屏2026-02-10%2009.42.08.png)
+![功能截图4](./img/截屏2026-02-10%2009.44.16.png)
 ## 支持的图书馆
 
 ### 国家级
@@ -123,14 +124,8 @@
 
 ## 其他版本
 
-### 小程序版
-豆瓣+图书馆查询助手小程序版已上线，欢迎扫码体验！
 
-小程序名称：**我的查书助手**
 
-![小程序二维码](https://github.com/wyj0605/douban_library/blob/main/img/qrcode.jpg?raw=true)
-![小程序二维码](./img/截屏2026-02-10%2009.42.08.png)
-![小程序二维码](./img/截屏2026-02-10%2009.44.16.png)
 ## 更新日志
 
 ### 2024-5-13
