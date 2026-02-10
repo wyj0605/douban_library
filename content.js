@@ -18,8 +18,8 @@ chrome.runtime.sendMessage(
     selectname = selectedProvince;
     let key = { code: response.provinceStatus };
     const isbn = /\d{13}/.exec($("#info").html())[0];
-    const bookRecnoUrl = "https://www.navy81.icu/jilin";
-    //const bookRecnoUrl = "http://127.0.0.1:8080/jilin";
+    // const bookRecnoUrl = "https://www.navy81.icu/jilin";
+    const bookRecnoUrl = "https://navy82.icu/jilin";
     try {
       for (let i = 0; i < selectcode.length; i++) {
         initDivElement(selectedProvince[i].name, "sk");
@@ -61,11 +61,70 @@ function initDivElement(selectname, book) {
   div.style.backgroundColor = "#F6F6F2";
   div.style.marginBottom = "20px";
   div.style.borderRadius = "5px";
+  div.style.position = "relative";
 
   const componentTitle = document.createElement("h2");
   componentTitle.innerHTML = `<b><span>${selectname}图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span></b>`;
   componentTitle.style.fontSize = "15px";
   div.appendChild(componentTitle);
+  
+  // 添加复制按钮
+  const copyBtn = document.createElement("button");
+  copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制';
+  copyBtn.style.position = "absolute";
+  copyBtn.style.top = "10px";
+  copyBtn.style.right = "10px";
+  copyBtn.style.padding = "3px 11px";
+  copyBtn.style.backgroundColor = "#f0f0f0";
+  copyBtn.style.border = "1px solid #ddd";
+  copyBtn.style.borderRadius = "4px";
+  copyBtn.style.fontSize = "12px";
+  copyBtn.style.cursor = "pointer";
+  copyBtn.style.zIndex = "10";
+  copyBtn.onclick = function() {
+    // 获取显示框的所有文本内容
+    let copyText = selectname + '图书馆\n';
+    
+    if (book === "sk") {
+      copyText += document.title.replace(' (豆瓣)','') + '\n';
+      copyText += searchbook;
+    } else if (book === "nk") {
+      copyText += document.title.replace(' (豆瓣)','') + '\n';
+      copyText += nobook;
+    } else {
+            copyText += '书名：'+document.title.replace(' (豆瓣)','') + '\n';
+
+      book.forEach((item) => {
+        const stat = item.loanableCount > 0 ? "在馆" : "借出";
+        const curlocalName = item.curlocalName || '未知';
+        const callno = item.callno || '未知';
+        const statusText = item.loanableCount !== null && item.loanableCount !== undefined ? 
+          `${item.loanableCount}/${item.copycount} ${stat}` : item.status || '未知';
+        copyText += `${curlocalName} ${callno} ${statusText}\n`;
+      });
+    }
+    
+    // 复制到剪贴板
+    navigator.clipboard.writeText(copyText).then(() => {
+      // 显示复制成功状态
+      copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+      copyBtn.style.backgroundColor = "#4CAF50";
+      copyBtn.style.color = "white";
+      copyBtn.style.borderColor = "#4CAF50";
+      
+      // 2秒后恢复原样
+      setTimeout(() => {
+        copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制';
+        copyBtn.style.backgroundColor = "#f0f0f0";
+        copyBtn.style.color = "";
+        copyBtn.style.borderColor = "#ddd";
+      }, 2000);
+    }).catch(err => {
+      console.error('复制失败:', err);
+    });
+  };
+  div.appendChild(copyBtn);
+  
   let content = "";
 
   if (book === "sk") {
@@ -127,7 +186,7 @@ function initDivElement(selectname, book) {
   const div1 = document.createElement("div");
   div1.style.textAlign = "right";
 
-  div1.innerHTML = `<a href="https://www.navy81.icu/" target="_blank">豆瓣+图书馆查询助手</a>`;
+  div1.innerHTML = `<a href="https://github.com/wyj0605" target="_blank">豆瓣+图书馆查询助手</a>`;
   div.appendChild(content);
   div.appendChild(div1);
   const element = document.querySelector(".aside");

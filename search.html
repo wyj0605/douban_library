@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豆瓣+图书馆查询助手</title>
+    <link href="output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 容器样式 */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 24px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        /* 标题样式 */
+        h1 {
+            color: #2c3e50;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        h1 i {
+            margin-right: 8px;
+            color: #4CAF50;
+        }
+        
+        /* 加载状态样式 */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+        }
+        
+        .loading i {
+            font-size: 36px;
+            color: #4CAF50;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+        
+        .loading p {
+            font-size: 14px;
+            color: #6c757d;
+            font-weight: 400;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        /* 脉冲动画 */
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+                transform: scale(0.95);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.6;
+                transform: scale(0.95);
+            }
+        }
+        
+        /* 结果样式 */
+        .result {
+            margin-top: 20px;
+        }
+        
+        .result h2 {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .result p {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 16px;
+        }
+        
+        /* 图书项样式 */
+        .book-item {
+            padding: 12px;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 12px;
+            background-color: white;
+        }
+        
+        .book-item h3 {
+            color: #27ae60;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+        }
+        
+        /* 图书馆信息样式 */
+        .library-info {
+            margin-top: 8px;
+        }
+        
+        .library-item {
+            margin: 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .library-item:last-child {
+            border-bottom: none;
+        }
+        
+        .library-item p {
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .library-item p span {
+            flex: 1;
+        }
+        
+        .library-item p .callno {
+            flex: 1;
+        }
+        
+        .library-item p .status {
+            flex: 1;
+            text-align: right;
+        }
+        
+        /* 底部信息样式 */
+        .footer-info {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+            text-align: right;
+        }
+        
+        .footer-info a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* 错误信息样式 */
+        .error {
+            color: #dc3545;
+            padding: 16px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        /* 关闭按钮样式 */
+        .close-btn {
+            display: block;
+            margin: 24px auto 0;
+            padding: 10px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            max-width: 140px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .close-btn:hover {
+            background-color: #45a049;
+        }
+        
+        /* 动画效果 */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .book-item {
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        /* 为不同的图书项添加延迟动画 */
+        .book-item:nth-child(1) { animation-delay: 0.1s; }
+        .book-item:nth-child(2) { animation-delay: 0.2s; }
+        .book-item:nth-child(3) { animation-delay: 0.3s; }
+        .book-item:nth-child(4) { animation-delay: 0.4s; }
+        .book-item:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* 深色模式 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #e0e0e0;
+            }
+            
+            .container {
+                background-color: #2d2d2d;
+                border: 1px solid #444;
+            }
+            
+            .book-item {
+                background-color: #333;
+                border: 1px solid #444;
+            }
+            
+            .library-item {
+                border-bottom: 1px solid #444;
+            }
+            
+            h1 {
+                color: #4caf50;
+            }
+            
+            h1 i {
+                color: #4caf50;
+            }
+            
+            .loading p {
+                color: #b0b0b0;
+            }
+            
+            .result p {
+                color: #b0b0b0;
+            }
+            
+            .library-item p {
+                color: #e0e0e0;
+            }
+            
+            .footer-info a {
+                color: #64b5f6;
+            }
+            
+            .error {
+                background-color: #3d2d2d;
+                border: 1px solid #5d3d3d;
+                color: #e74c3c;
+            }
+            
+            .close-btn {
+                background-color: #4caf50;
+            }
+            
+            .close-btn:hover {
+                background-color: #45a049;
+            }
+            
+            .copy-btn {
+                background-color: #444;
+                border: 1px solid #555;
+                color: #e0e0e0;
+            }
+            
+            .copy-btn:hover {
+                background-color: #555;
+            }
+            
+            .copy-btn.copied {
+                background-color: #4caf50;
+                border-color: #4caf50;
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 640px) {
+            .container {
+                margin: 10px;
+                padding: 16px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .loading {
+                padding: 40px 0;
+            }
+            
+            .book-item {
+                padding: 12px;
+            }
+        }
+        
+        /* 小屏幕设备优化 */
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+                padding: 12px;
+            }
+            
+            .library-item p {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .library-item p span {
+                margin-bottom: 4px;
+            }
+            
+            .library-item p .status {
+                text-align: left;
+            }
+        }
+        
+        /* 视觉层次增强 */
+        .book-item {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .book-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        
+        /* 突出重要信息 */
+        .library-item p .status {
+            font-weight: 600;
+        }
+        
+        .library-item p .status.available {
+            color: #27ae60;
+        }
+        
+        .library-item p .status.unavailable {
+            color: #e74c3c;
+        }
+        
+        /* 可点击元素的悬停效果 */
+        .library-item p span {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .library-item p span:hover {
+            color: #3498db;
+        }
+        
+        /* 复制按钮样式 */
+        .book-item {
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 12px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 1;
+        }
+        
+        .copy-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .copy-btn.copied {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+        
+        .copy-btn i {
+            margin-right: 4px;
+            font-size: 10px;
+        }
+        
+        /* 调整图书项内容的内边距，避免被复制按钮遮挡 */
+        .book-item h3 {
+            margin-right: 80px; /* 为复制按钮留出空间 */
+        }
+        
+        .library-info {
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <h1><i class="fas fa-book"></i> 豆瓣+图书馆查询助手</h1> -->
+        <div id="loading" class="loading">
+            <i class="fas fa-spinner"></i>
+            <p>正在查询，请稍候...</p>
+        </div>
+        <div id="result" class="result" style="display: none;"></div>
+        <div id="error" class="error" style="display: none;"></div>
+        <button id="closeBtn" class="close-btn">关闭</button>
+    </div>
+    <script src="search.js"></script>
+</body>
+</html>

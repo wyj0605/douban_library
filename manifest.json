@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "豆瓣+图书馆查询助手",
-  "permissions": ["storage"],
-  "version": "1.0.8",
+  "permissions": ["storage", "contextMenus"],
+  "version": "1.2.0",
 
   "action": {
     "default_icon": "img/book_128.png",
@@ -28,5 +28,11 @@
   "options_ui": {
     "page": "options.html",
     "open_in_tab": true
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["search.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
