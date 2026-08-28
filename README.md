@@ -26,6 +26,17 @@
 
 ## 安装方法
 
+### 桌面应用
+
+- [Windows 10/11 x64 免安装版 EXE](./release/豆瓣查书-Windows-x64.exe)
+- [macOS 桌面版 ZIP](./release/豆瓣查书-macOS.zip)
+
+Windows 版下载后直接双击运行；如果 Windows SmartScreen 提示来源未知，可选择“更多信息”→“仍要运行”。macOS 版下载并解压后，将“豆瓣查书.app”拖入“应用程序”文件夹。
+
+桌面版直接连接 `navy82.icu` 接口，无需浏览器扩展，支持选择图书馆并查看馆藏状态、位置和索书号。
+
+### 浏览器扩展
+
 支持主流浏览器，选择适合您的版本进行安装：
 
 - [Google Chrome](https://chromewebstore.google.com/detail/%E8%B1%86%E7%93%A3+%E5%9B%BE%E4%B9%A6%E9%A6%86%E6%9F%A5%E8%AF%A2%E5%8A%A9%E6%89%8B/ikdabfmbodafpkjkhbookfbimcjgkdnl)
@@ -124,6 +135,8 @@
 
 ## 其他版本
 
+- Windows 桌面版：免安装 EXE，适用于 Windows 10/11 x64
+- macOS 桌面版：原生 SwiftUI 应用，适用于 macOS 13 及以上
 
 
 ## 更新日志
@@ -137,6 +150,14 @@
 - 新增右键自动查书功能
 - 优化长文本显示效果
 - 改进用户界面和交互体验
+
+### 桌面版更新 2026-8-28
+
+- 发布 Windows x64 免安装版和 macOS 桌面版
+- macOS 版支持推荐图书、自动补全、最近查询和返回首页
+- Windows 版支持直接连接服务器查询图书馆馆藏
+- 图书馆名称统一显示完整名称
+- 优化图书详情、馆藏信息与一键复制
 ## 联系我们
 
 如有问题或建议，欢迎通过以下方式联系：
