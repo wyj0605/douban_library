@@ -70,7 +70,8 @@ async function searchBook() {
 // 执行实际的搜索请求
 async function performSearch(query, code) {
     const bookRecnoUrl = "https://navy82.icu/jilin_search";
-    const requestData = { isbn: query, code: code };
+    // v2 同时支持书名和 ISBN，并返回固定的结构化数据。
+    const requestData = { query: query, code: code, v: 2, client: 'browser-extension' };
     console.log('发送请求到:', bookRecnoUrl);
     console.log('请求参数:', requestData);
 
@@ -107,6 +108,26 @@ function displayResult(query, responseData, selectcode) {
     resultDiv.style.display = 'block';
 
     let html = ``;
+
+    // 新接口使用稳定字段；转换为页面现有展示模型，兼容旧服务器返回。
+    if (responseData && responseData.version === 2 && Array.isArray(responseData.holdings)) {
+        const book = responseData.book || {};
+        const library = responseData.library || {};
+        responseData = responseData.holdings.map((item) => ({
+            title: item.title || book.title || query,
+            author: item.author || book.author || '',
+            publisher: item.publisher || book.publisher || '',
+            pubdate: item.pubdate || book.pubdate || '',
+            isbn: responseData.isbn || book.isbn || '',
+            curlibName: item.library_name || library.name || '',
+            curlocalName: item.location || '',
+            callno: item.call_number || '',
+            statename: item.status || '',
+            loanableCount: item.loanable_count || 0,
+            copycount: item.copy_count || 0,
+            retudate: item.return_date || ''
+        }));
+    }
 
     if (!responseData || (Array.isArray(responseData) && responseData.length === 0)) {
         html += '<div class="book-item"><h3>暂无此图书</h3></div>';
