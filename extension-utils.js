@@ -46,7 +46,7 @@
         const loanableCount = hasLoanableCount && Number.isFinite(Number(item.loanable_count)) ? Number(item.loanable_count) : null;
         const copyCount = hasCopyCount && Number.isFinite(Number(item.copy_count)) ? Number(item.copy_count) : null;
         const available = item.available === true || (loanableCount !== null && loanableCount > 0);
-        const status = item.status || (available ? "在馆" : loanableCount === 0 ? "不在馆" : "状态未提供");
+        const status = item.status || (available ? "在馆" : loanableCount === 0 ? "借出" : "状态未提供");
         return { location: item.location || "馆藏地点未标注", callNumber: item.call_number || "未知", status, available, loanableCount, copyCount, returnDate: item.return_date || "" };
       })
     };
