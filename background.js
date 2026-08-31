@@ -1,3 +1,5 @@
+importScripts('provinces.js');
+
 // 创建右键菜单
 chrome.runtime.onInstalled.addListener(function() {
     chrome.contextMenus.create({
@@ -18,11 +20,12 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
             console.log('从 chrome.storage.local 读取的数据:', items);
 
             // 如果有选中的图书馆，使用第一个作为 code 值
-            const selectcode = Object.keys(items);
+            const validCodes = new Set((typeof provinces !== 'undefined' ? provinces : []).map(item => item.code));
+            const selectcode = Object.keys(items).filter(key => items[key] === true && validCodes.has(key));
             let code = "1"; // 默认值
 
             if (selectcode.length > 0) {
-                code = selectcode[0]; // 使用第一个选中的图书馆代码
+                code = selectcode[0]; // 使用第一个有效且已选中的图书馆代码
                 console.log('使用的 code 值:', code);
             }
 

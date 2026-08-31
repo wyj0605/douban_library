@@ -37,7 +37,7 @@ async function searchBook() {
                 console.log('从chrome.storage.local读取的数据:', items);
 
                 // 获取所有选中的图书馆代码
-                const selectedLibraries = Object.keys(items).filter(key => items[key]);
+                const selectedLibraries = Object.keys(items).filter(key => items[key] === true);
                 console.log('选中的图书馆代码:', selectedLibraries);
 
                 // 如果有选中的图书馆，使用第一个作为code值

@@ -8,7 +8,9 @@ function delete_div() {
 chrome.runtime.sendMessage(
   { action: "getProvinceStatus" },
   function (response) {
-    const selectcode = Object.keys(response.provinceStatus);
+    const selectcode = Object.keys(response.provinceStatus || {}).filter(
+      (code) => response.provinceStatus[code] === true && provinces.some((province) => province.code === code)
+    );
     var selectedProvince = [];
     for (let i = 0; i < selectcode.length; i++) {
       selectedProvince[i] = provinces.find(
@@ -17,10 +19,15 @@ chrome.runtime.sendMessage(
     }
     selectname = selectedProvince;
     let key = { code: response.provinceStatus };
-    const isbn = /\d{13}/.exec($("#info").html())[0];
+    const infoText = $("#info").text() || "";
+    const isbnMatch = infoText.match(/(?:97[89][\d\s-]{10,16}|\b\d{9}[\dXx]\b)/);
+    const isbn = isbnMatch ? isbnMatch[0].replace(/[^0-9Xx]/g, "") : "";
     // const bookRecnoUrl = "https://www.navy81.icu/jilin";
     const bookRecnoUrl = "https://navy82.icu/jilin";
     try {
+      if (!isbn || selectcode.length === 0) {
+        return;
+      }
       for (let i = 0; i < selectcode.length; i++) {
         initDivElement(selectedProvince[i].name, "sk");
       }
@@ -64,7 +71,8 @@ function initDivElement(selectname, book) {
   div.style.position = "relative";
 
   const componentTitle = document.createElement("h2");
-  componentTitle.innerHTML = `<b><span>${selectname}图书馆&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span></b>`;
+  const libraryTitle = /图书馆$/.test(selectname) ? selectname : `${selectname}图书馆`;
+  componentTitle.innerHTML = `<b><span>${libraryTitle}&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·</span></b>`;
   componentTitle.style.fontSize = "15px";
   div.appendChild(componentTitle);
   
@@ -83,7 +91,7 @@ function initDivElement(selectname, book) {
   copyBtn.style.zIndex = "10";
   copyBtn.onclick = function() {
     // 获取显示框的所有文本内容
-    let copyText = selectname + '图书馆\n';
+    let copyText = libraryTitle + '\n';
     
     if (book === "sk") {
       copyText += document.title.replace(' (豆瓣)','') + '\n';
