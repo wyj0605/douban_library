@@ -14,7 +14,18 @@
     if (state.error) throw new Error(state.error);
     const response = await chrome.runtime.sendMessage({ action: "searchBooks", query: isbn, codes: state.selectedLibraries });
     if (response.error) throw new Error(response.error);
-    root.replaceChildren(...response.results.map((result) => ResultUI.card(result, true)));
+    const results = Array.isArray(response.results) ? response.results : [];
+    const cards = results.map((result) => ResultUI.card(result, true));
+    if (!cards.length) {
+      const empty = document.createElement("p"); empty.className = "dl-empty"; empty.textContent = "暂无馆藏查询结果"; cards.push(empty);
+    }
+    const brand = document.createElement("a");
+    brand.className = "dl-brand";
+    brand.href = "https://github.com/wyj0605/douban_library";
+    brand.target = "_blank";
+    brand.rel = "noopener noreferrer";
+    brand.textContent = "豆瓣+图书馆查询助手";
+    root.replaceChildren(...cards, brand);
   } catch (error) {
     const message = document.createElement("p"); message.className = "dl-error"; message.textContent = `馆藏查询失败：${error.message}`; root.replaceChildren(message);
   }
