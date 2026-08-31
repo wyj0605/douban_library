@@ -88,4 +88,7 @@ const provinces = [
   // { code: "17", name: "株洲市" },
   // { code: "36", name: "柳州市" },
 ];
+
+// 唯一的离线馆列表。联网时由 /api/libraries 刷新；其余页面不再维护副本。
+globalThis.LIBRARIES = provinces;
   

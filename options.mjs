@@ -1,61 +1,30 @@
-import provinces from "./provinces.mjs";
-
-document.addEventListener("DOMContentLoaded", function () {
-  const provinceList = document.getElementById("provinceList");
-  const checkboxes = [];
-  let selectedCount = 0;
-
-  // Clear all data in chrome.storage.local
-  chrome.storage.local.clear();
-
-  // Event listener for checkbox changes
-  function handleCheckboxChange() {
-    const isChecked = this.checked;
-    const code = this.getAttribute("name");
-
-    if (isChecked) {
-      selectedCount++;
-    } else {
-      selectedCount--;
-      // Remove the province from storage if unchecked
-      chrome.storage.local.remove(code, function () {
-        console.log(`Removed ${code} from storage.`);
-      });
-    }
-
-    if (selectedCount >= 2) {
-      // Disable other checkboxes if two provinces are selected
-      checkboxes.forEach(function (checkbox) {
-        if (!checkbox.checked) {
-          checkbox.disabled = true;
-        }
-      });
-    } else {
-      // Enable all checkboxes if less than two provinces are selected
-      checkboxes.forEach(function (checkbox) {
-        checkbox.disabled = false;
-      });
-    }
-
-    // Update storage with the selected province status
-    chrome.storage.local.set({ [code]: isChecked }, function () {
-      console.log(`Province ${code} status saved.`);
-    });
-  }
-
-  // Render checkboxes for provinces
-  provinces.forEach(function (province) {
-    const item = document.createElement("div");
-    item.classList.add("flex", "items-center", "py-1");
-    item.innerHTML = `
-        <label class="flex items-center cursor-pointer">
-            <input type="checkbox" name="${province.code}" class="form-checkbox mr-2 checked:bg-gray-900 checked:border-transparent checked:ring-2 checked:ring-offset-2 checked:ring-blue-500 h-6 w-6 ">
-            <span>${province.name}</span>
-        </label>
-    `;
-    provinceList.appendChild(item);
-    const checkbox = item.querySelector(".form-checkbox");
-    checkboxes.push(checkbox);
-    checkbox.addEventListener("change", handleCheckboxChange);
-  });
-});
+const list = document.getElementById("provinceList");
+const search = document.getElementById("librarySearch");
+const onlySelected = document.getElementById("onlySelected");
+const count = document.getElementById("selectedCount");
+const notice = document.getElementById("notice");
+let libraries = [], selected = [];
+async function load(refresh = false) {
+  const state = await chrome.runtime.sendMessage({ action: refresh ? "refreshLibraryRegistry" : "getExtensionState" });
+  if (state.error) throw new Error(state.error);
+  libraries = state.libraries; selected = state.selectedLibraries; render();
+}
+function render() {
+  const keyword = search.value.trim().toLowerCase();
+  const filtered = libraries.filter((item) => (!keyword || item.name.toLowerCase().includes(keyword) || item.code.includes(keyword)) && (!onlySelected.checked || selected.includes(item.code)));
+  list.replaceChildren(...filtered.map((item) => {
+    const label = document.createElement("label"); label.className = "library-option";
+    const input = document.createElement("input"); input.type = "checkbox"; input.checked = selected.includes(item.code); input.disabled = selected.length >= 2 && !input.checked;
+    const name = document.createElement("span"); name.textContent = item.name;
+    const code = document.createElement("small"); code.textContent = `编号 ${item.code}`;
+    input.addEventListener("change", async () => {
+      if (input.checked) selected = [...selected, item.code].slice(0, 2); else selected = selected.filter((value) => value !== item.code);
+      await chrome.storage.local.set({ settings: { selectedLibraries: selected } }); notice.textContent = "已自动保存"; render(); setTimeout(() => notice.textContent = "", 1200);
+    }); label.append(input, name, code); return label;
+  }));
+  count.textContent = `已选择 ${selected.length}/2`;
+}
+search.addEventListener("input", render); onlySelected.addEventListener("change", render);
+document.getElementById("resetSelection").addEventListener("click", async () => { selected = [libraries[0]?.code || "1"]; await chrome.storage.local.set({ settings: { selectedLibraries: selected } }); notice.textContent = "已恢复默认图书馆"; render(); });
+document.getElementById("refreshLibraries").addEventListener("click", () => load(true));
+load().catch((error) => { notice.textContent = `加载失败：${error.message}`; });

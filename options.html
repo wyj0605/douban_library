@@ -1,54 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>豆瓣+图书馆查询助手</title>
-    <link href="output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-        crossorigin="anonymous">
-    <style>
-        .container {
-            max-width: 1024px;
-            margin: 0 auto;
-        }
-    </style>
-</head>
-
-<body>
-    <header
-        class="flex items-center justify-center bg-gradient-to-r from-green-600 via-green-500 to-green-400 bg-noise bg-stripes">
-        <div class="flex items-center justify-between px-4 py-2 mx-auto max-w-7xl">
-            <div>
-                <h1 class="text-2xl tracking-widest text-white "><i class="fa fa-book"></i>豆瓣+图书馆查询助手</h1>
-            </div>
-
-        </div>
-    </header>
-    <div class="p-4 bg-green-100 border-l-2 border-green-500" >
-        <div class="flex items-center justify-center">
-            <div class="flex-shrink-0">
-                <i class="text-green-500 fas fa-info-circle"></i>
-            </div>
-            <div class="ml-3">
-                <p class="text-lg text-green-700">请选择相应的图书馆，按F5刷新清除所有选项。</p>
-            </div>
-        </div>
-    </div>
-    <div class="shadow-md">
-        <div class="container">
-            <div id="provinceList" class="grid grid-cols-4 gap-4 py-4 text-xl">
-            </div>
-        </div>
-        <div class="p-6 text-center bg-black/5 bg-noise bg-gradient-to-r bg-stripes bg-gray-80">
-            <span>© 2024 Copyright:</span>
-            <a class="mr-3 font-semibold" href="http://www.navy81.icu">无理数</a>
-            <a href="https://github.com/wyj0605/douban_library" class="mr-3 hover:text-gray-500"><i
-                    class="fab fa-github"></i></a>
-            <a href="https://twitter.com/wyj0605" class="mr-3 hover:text-gray-500"><i class="fab fa-twitter"></i></a>
-        </div>
-    </div>
-    <script src="provinces.mjs" type="module"></script>
-    <script src="options.mjs" type="module"></script>
-</body>
-</html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>查书助手设置</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f7f5;color:#202420;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}header{background:linear-gradient(120deg,#087c34,#31a65c);color:#fff;padding:24px}.wrap{max-width:1040px;margin:auto}h1{margin:0 0 4px;font-size:26px}header p{margin:0;opacity:.88}.panel{background:#fff;margin:24px auto;padding:22px;border-radius:14px;box-shadow:0 6px 22px rgba(15,70,34,.07)}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:16px}input[type=search]{flex:1;min-width:240px;border:1px solid #ccd5ce;border-radius:9px;padding:11px 13px;font:inherit}button{border:1px solid #ccd5ce;background:#fff;border-radius:8px;padding:9px 13px;cursor:pointer}button:hover{background:#edf7f0}.count{color:#087c34;font-weight:650}.notice{color:#087c34;min-height:24px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}.library-option{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:9px;padding:11px;border:1px solid #e2e7e3;border-radius:9px;cursor:pointer}.library-option:has(input:checked){border-color:#27a153;background:#f1faf4}.library-option small{color:#8a918c}.library-option:has(input:disabled){opacity:.52;cursor:not-allowed}footer{text-align:center;color:#717771;padding:10px 20px 30px}footer a{color:#087c34}</style></head><body>
+<header><div class="wrap"><h1>📚 豆瓣+图书馆查询助手</h1><p>最多选择两个图书馆，修改后自动保存。</p></div></header>
+<main class="wrap panel"><div class="toolbar"><input id="librarySearch" type="search" placeholder="搜索图书馆名称或编号" autocomplete="off"><label><input id="onlySelected" type="checkbox"> 只看已选</label><button id="resetSelection">恢复默认</button><button id="refreshLibraries">更新列表</button><span id="selectedCount" class="count"></span></div><div id="notice" class="notice" role="status"></div><div id="provinceList" class="grid"></div></main>
+<footer>© 2026 <a href="https://navy82.icu/" target="_blank">无理数</a> · <a href="https://github.com/wyj0605/douban_library" target="_blank">GitHub</a></footer><script src="options.mjs" type="module"></script></body></html>

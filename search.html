@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>豆瓣+图书馆查询助手</title>
     <link href="output.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="result-ui.css">
     <style>
         /* 全局样式 */
         * {
@@ -438,13 +438,15 @@
     <div class="container">
         <!-- <h1><i class="fas fa-book"></i> 豆瓣+图书馆查询助手</h1> -->
         <div id="loading" class="loading">
-            <i class="fas fa-spinner"></i>
+            <i aria-hidden="true">↻</i>
             <p>正在查询，请稍候...</p>
         </div>
         <div id="result" class="result" style="display: none;"></div>
         <div id="error" class="error" style="display: none;"></div>
         <button id="closeBtn" class="close-btn">关闭</button>
     </div>
+    <script src="extension-utils.js"></script>
+    <script src="result-ui.js"></script>
     <script src="search.js"></script>
 </body>
 </html>

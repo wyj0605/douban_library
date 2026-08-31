@@ -1,39 +1,10 @@
-import provinces from './provinces.mjs';
-
-document.addEventListener("DOMContentLoaded", function () {
-    const provinceList = document.getElementById("provinceList");
-    const OPEN_OPTIONS_BTN_ID = 'openOptions';
-
-    document.getElementById(OPEN_OPTIONS_BTN_ID).addEventListener('click', openOptionsPage);
-
-    // Render initially
-    renderProvinceListItems(provinceList);
-
-    // Listen for changes in province selection from the backend
-    chrome.storage.local.onChanged.addListener(function(changes, areaName) {
-        renderProvinceListItems(provinceList);
-    });
-});
-
-function openOptionsPage() {
-    chrome.tabs.create({url: 'options.html'});
+const list = document.getElementById("provinceList");
+async function render() {
+  const state = await chrome.runtime.sendMessage({ action: "getExtensionState" });
+  if (state.error) { list.textContent = `读取失败：${state.error}`; return; }
+  const selected = state.selectedLibraries.map((code) => state.libraries.find((item) => item.code === code)).filter(Boolean);
+  list.replaceChildren(...selected.map((item) => { const p = document.createElement("p"); p.className = "selected-library"; p.textContent = `✓ ${item.name}`; return p; }));
+  if (!selected.length) list.textContent = "尚未选择图书馆";
 }
-
-function renderProvinceListItems(provinceList) {
-    chrome.storage.local.get(null, function(items) {
-        provinceList.innerHTML = ""; // Clear previous items
-        const selectedProvinceCodes = Object.keys(items);
-        selectedProvinceCodes.slice(0, 2).forEach(function(code) {
-            const selectedProvince = provinces.find(function(province) {
-                return province.code === code;
-            });
-            if (selectedProvince) {
-                const item = document.createElement("div");
-                item.innerHTML = `
-                    <p><i class="far fa-lg fa-check-circle text-green-500" title="已选择"></i>   ${selectedProvince.name}图书馆</p>
-                `;
-                provinceList.appendChild(item);
-            }
-        });
-    });
-}
+document.getElementById("openOptions").addEventListener("click", () => chrome.runtime.openOptionsPage());
+chrome.storage.onChanged.addListener(render); render();
