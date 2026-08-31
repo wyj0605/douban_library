@@ -33,7 +33,12 @@ chrome.runtime.sendMessage(
       }
       $.post(
         bookRecnoUrl,
-        JSON.stringify({ isbn: isbn, key }),
+        JSON.stringify({
+          isbn: isbn,
+          key,
+          client: "browser-extension",
+          extension_version: "1.3.1"
+        }),
         function (responseData) {
           for (let i = 0; i < selectcode.length; i++) {
             delete_div();
