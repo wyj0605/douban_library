@@ -16,11 +16,10 @@ function render() {
     const label = document.createElement("label"); label.className = "library-option";
     const input = document.createElement("input"); input.type = "checkbox"; input.checked = selected.includes(item.code); input.disabled = selected.length >= 2 && !input.checked;
     const name = document.createElement("span"); name.textContent = item.name;
-    const code = document.createElement("small"); code.textContent = `编号 ${item.code}`;
     input.addEventListener("change", async () => {
       if (input.checked) selected = [...selected, item.code].slice(0, 2); else selected = selected.filter((value) => value !== item.code);
       await chrome.storage.local.set({ settings: { selectedLibraries: selected } }); notice.textContent = "已自动保存"; render(); setTimeout(() => notice.textContent = "", 1200);
-    }); label.append(input, name, code); return label;
+    }); label.append(input, name); return label;
   }));
   count.textContent = `已选择 ${selected.length}/2`;
 }
