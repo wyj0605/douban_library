@@ -37,7 +37,7 @@ chrome.runtime.sendMessage(
           isbn: isbn,
           key,
           client: "browser-extension",
-          extension_version: "1.3.1"
+          extension_version: "1.3.2"
         }),
         function (responseData) {
           for (let i = 0; i < selectcode.length; i++) {
@@ -105,11 +105,17 @@ function initDivElement(selectname, book) {
       copyText += document.title.replace(' (豆瓣)','') + '\n';
       copyText += nobook;
     } else {
-            copyText += '书名：'+document.title.replace(' (豆瓣)','') + '\n';
+      const firstBook = Array.isArray(book) && book.length ? book[0] : {};
+      copyText += `书名：${firstBook.title || document.title.replace(' (豆瓣)', '')}\n`;
+      if (firstBook.author) copyText += `作者：${firstBook.author}\n`;
+      if (firstBook.publisher || firstBook.pubdate) {
+        copyText += `出版信息：${[firstBook.publisher, firstBook.pubdate].filter(Boolean).join(' / ')}\n`;
+      }
+      if (firstBook.isbn) copyText += `ISBN：${firstBook.isbn}\n`;
 
       book.forEach((item) => {
-        const stat = item.loanableCount > 0 ? "在馆" : "借出";
-        const curlocalName = item.curlocalName || '未知';
+        const stat = item.status || (item.loanableCount > 0 ? "在馆" : "借出");
+        const curlocalName = item.curlocalName || item.curlibName || '馆藏地点未标注';
         const callno = item.callno || '未知';
         const statusText = item.loanableCount !== null && item.loanableCount !== undefined ? 
           `${item.loanableCount}/${item.copycount} ${stat}` : item.status || '未知';
@@ -151,38 +157,76 @@ function initDivElement(selectname, book) {
     div1.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
     content = div1;
   } else {
+    const firstBook = Array.isArray(book) && book.length ? book[0] : {};
+    const metadata = document.createElement("div");
+    metadata.style.padding = "10px 0 12px";
+    metadata.style.marginBottom = "4px";
+    metadata.style.borderBottom = "1px solid rgba(0,0,0,0.12)";
+    metadata.style.fontSize = "14px";
+    metadata.style.lineHeight = "1.65";
+
+    const metadataRows = [
+      ["书名", firstBook.title || document.title.replace(' (豆瓣)', '')],
+      ["作者", firstBook.author],
+      ["出版社", firstBook.publisher],
+      ["出版时间", firstBook.pubdate],
+      ["ISBN", firstBook.isbn]
+    ].filter(([, value]) => value);
+    metadataRows.forEach(([label, value]) => {
+      const row = document.createElement("div");
+      const labelNode = document.createElement("strong");
+      labelNode.textContent = `${label}：`;
+      row.appendChild(labelNode);
+      row.appendChild(document.createTextNode(String(value)));
+      metadata.appendChild(row);
+    });
+
     const ul = document.createElement("ul");
     ul.id = "douban-hlj-lib-list";
+    ul.style.margin = "0";
+    ul.style.padding = "0";
+    ul.style.listStyle = "none";
 
     book.forEach((item) => {
       const li = document.createElement("li");
       li.style.borderBottom = "1px solid rgba(0,0,0,0.08)";
-      li.style.margin = "12px auto";
-      const stat = item.loanableCount > 0 ? "在馆" : "借出";
+      li.style.padding = "11px 0";
+      li.style.margin = "0";
+      const stat = item.status || (item.loanableCount > 0 ? "在馆" : "借出");
 
       const div1 = document.createElement("div");
-      div1.style.width = "130px";
-      div1.style.display = "inline-block";
-      div1.textContent = item.curlocalName;
+      div1.style.fontSize = "14px";
+      div1.style.fontWeight = "600";
+      div1.style.marginBottom = "5px";
+      div1.style.overflowWrap = "anywhere";
+      div1.textContent = item.curlocalName || item.curlibName || "馆藏地点未标注";
+
+      const detailRow = document.createElement("div");
+      detailRow.style.display = "flex";
+      detailRow.style.alignItems = "center";
+      detailRow.style.justifyContent = "space-between";
+      detailRow.style.gap = "10px";
 
       const div2 = document.createElement("div");
-      div2.style.width = "90px";
-      div2.style.display = "inline-block";
-      div2.style.overflowWrap = "break-word";
-      div2.textContent = item.callno;
+      div2.style.minWidth = "0";
+      div2.style.fontFamily = "ui-monospace, SFMono-Regular, Menlo, monospace";
+      div2.style.fontSize = "13px";
+      div2.style.whiteSpace = "nowrap";
+      div2.style.overflow = "hidden";
+      div2.style.textOverflow = "ellipsis";
+      div2.title = item.callno || "索书号未知";
+      div2.textContent = `索书号：${item.callno || "未知"}`;
 
       const div3 = document.createElement("div");
-      div3.style.width = "60px";
-      div3.style.display = "inline-block";
-      div3.style.display.textAlign = "right";
+      div3.style.flex = "0 0 auto";
+      div3.style.fontSize = "13px";
+      div3.style.fontWeight = "600";
+      div3.style.color = item.loanableCount > 0 ? "#16823b" : "#9b3d32";
 
       if (item.loanableCount !== null && item.loanableCount !== undefined) {
         div3.textContent = `${item.loanableCount}/${item.copycount} ${stat}`;
       } else {
-        div3.textContent = `   ${item.status} `;
-        div3.style.width = "60px";
-        div3.style.display = "inline-block";
-        div2.style.display.textAlign = "right";
+        div3.textContent = item.status || "未知";
       }
       div3.title =
         item.retudate !== null && item.retudate !== undefined
@@ -190,11 +234,15 @@ function initDivElement(selectname, book) {
           : "";
 
       li.appendChild(div1);
-      li.appendChild(div2);
-      li.appendChild(div3);
+      detailRow.appendChild(div2);
+      detailRow.appendChild(div3);
+      li.appendChild(detailRow);
       ul.appendChild(li);
     });
-    content = ul;
+    const contentWrapper = document.createElement("div");
+    contentWrapper.appendChild(metadata);
+    contentWrapper.appendChild(ul);
+    content = contentWrapper;
   }
   const div1 = document.createElement("div");
   div1.style.textAlign = "right";
