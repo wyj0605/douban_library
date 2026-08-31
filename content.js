@@ -3,10 +3,12 @@
   const info = document.querySelector("#info")?.textContent || "";
   const isbn = ExtensionUtils.extractIsbn(info);
   if (!isbn) return;
-  const anchor = document.querySelector("#info")?.parentElement || document.querySelector("#interest_sectl") || document.body;
+  // 保持旧版位置：馆藏信息固定显示在豆瓣详情页右侧栏顶部。
+  const aside = document.querySelector(".aside");
   const root = document.createElement("div"); root.id = "douban-library-results"; root.className = "dl-results dl-results--douban";
   root.append(Object.assign(document.createElement("p"), { className: "dl-loading", textContent: "正在查询馆藏…" }));
-  anchor.insertAdjacentElement("afterend", root);
+  if (aside) aside.insertBefore(root, aside.firstChild);
+  else (document.querySelector("#info")?.parentElement || document.body).insertAdjacentElement("afterend", root);
   try {
     const state = await chrome.runtime.sendMessage({ action: "getExtensionState" });
     if (state.error) throw new Error(state.error);
