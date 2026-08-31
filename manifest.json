@@ -26,7 +26,8 @@
   "icons": {
     "128": "img/book_128.png",
     "16": "img/book_16.png",
-    "32": "img/book_32.png"
+    "32": "img/book_32.png",
+    "48": "img/book_48.png"
   },
   "homepage_url": "https://navy82.icu/",
   "options_ui": {
