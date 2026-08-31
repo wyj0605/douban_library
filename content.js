@@ -27,6 +27,6 @@
     brand.textContent = "豆瓣+图书馆查询助手";
     root.replaceChildren(...cards, brand);
   } catch (error) {
-    const message = document.createElement("p"); message.className = "dl-error"; message.textContent = `馆藏查询失败：${error.message}`; root.replaceChildren(message);
+    const message = document.createElement("p"); message.className = "dl-empty"; message.textContent = "暂无此图书"; root.replaceChildren(message);
   }
 })();

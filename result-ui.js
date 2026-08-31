@@ -14,7 +14,7 @@
     const copy = el("button", "dl-copy", "复制"); copy.type = "button";
     copy.addEventListener("click", async () => { try { await navigator.clipboard.writeText(resultText(result, compact)); copy.textContent = "已复制"; setTimeout(() => copy.textContent = "复制", 1400); } catch { copy.textContent = "复制失败"; } });
     head.append(copy); box.append(head);
-    if (result.error) { box.append(el("p", "dl-error", `查询失败：${result.error}`)); return box; }
+    if (result.error) { box.append(el("p", "dl-empty", "暂无此图书")); return box; }
     if (result.empty) { box.append(el("p", "dl-empty", "暂无此图书馆藏")); return box; }
     if (!compact) {
       const meta = el("dl", "dl-meta");

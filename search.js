@@ -15,7 +15,7 @@
       loading.style.display = "none"; result.style.display = "block"; result.classList.add("dl-results");
       result.replaceChildren(...response.results.map((item) => ResultUI.card(item)));
     } catch (error) {
-      loading.style.display = "none"; errorBox.style.display = "block"; errorBox.textContent = `查询失败：${error.message}`;
+      loading.style.display = "none"; errorBox.style.display = "block"; errorBox.textContent = "暂无此图书";
       const retry = document.createElement("button"); retry.type = "button"; retry.className = "close-btn"; retry.textContent = "重试";
       retry.addEventListener("click", () => { errorBox.style.display = "none"; retry.remove(); loading.style.display = "flex"; run(); });
       errorBox.after(retry);
