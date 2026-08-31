@@ -40,7 +40,15 @@
       ok: Boolean(payload?.ok), empty: !payload?.ok || holdings.length === 0,
       library: { code: String(library.code || ""), name: normalizeLibraryName(library.code, library.name) },
       book: { title: book.title || holdings[0]?.title || "", author: book.author || holdings[0]?.author || "", publisher: book.publisher || holdings[0]?.publisher || "", pubdate: book.pubdate || holdings[0]?.pubdate || "", isbn: payload?.isbn || book.isbn || "" },
-      holdings: holdings.map((item) => ({ location: item.location || "馆藏地点未标注", callNumber: item.call_number || "未知", status: item.status || (item.available ? "在馆" : "未知"), available: item.available === true || Number(item.loanable_count) > 0, loanableCount: Number.isFinite(Number(item.loanable_count)) ? Number(item.loanable_count) : null, copyCount: Number.isFinite(Number(item.copy_count)) ? Number(item.copy_count) : null, returnDate: item.return_date || "" }))
+      holdings: holdings.map((item) => {
+        const hasLoanableCount = item.loanable_count !== null && item.loanable_count !== undefined && item.loanable_count !== "";
+        const hasCopyCount = item.copy_count !== null && item.copy_count !== undefined && item.copy_count !== "";
+        const loanableCount = hasLoanableCount && Number.isFinite(Number(item.loanable_count)) ? Number(item.loanable_count) : null;
+        const copyCount = hasCopyCount && Number.isFinite(Number(item.copy_count)) ? Number(item.copy_count) : null;
+        const available = item.available === true || (loanableCount !== null && loanableCount > 0);
+        const status = item.status || (available ? "在馆" : loanableCount === 0 ? "不在馆" : "状态未提供");
+        return { location: item.location || "馆藏地点未标注", callNumber: item.call_number || "未知", status, available, loanableCount, copyCount, returnDate: item.return_date || "" };
+      })
     };
   }
   root.ExtensionUtils = { MAX_LIBRARIES, uniqueCodes, migrateSelection, extractIsbn, normalizeLibraryName, normalizeResponse };
