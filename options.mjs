@@ -5,10 +5,11 @@ const count = document.getElementById("selectedCount");
 const notice = document.getElementById("notice");
 let libraries = [], selected = [];
 const CAPITAL_CITIES = ["哈尔滨", "长春", "沈阳", "石家庄", "太原", "济南", "郑州", "南京", "杭州", "合肥", "福州", "南昌", "武汉", "长沙", "广州", "海口", "成都", "贵阳", "昆明", "西安", "兰州", "西宁", "呼和浩特", "南宁", "拉萨", "银川", "乌鲁木齐"];
+const PROVINCIAL_CODES = new Set(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "13", "41", "42", "45", "57", "58", "59", "60", "61", "62", "74", "75", "76", "77", "78", "83", "84", "85", "86", "87", "88"]);
 const collator = new Intl.Collator("zh-CN");
 function libraryGroup(item) {
   const name = item.name || "";
-  if (/国家图书馆|首都图书馆|上海图书馆|上海市图书馆|天津图书馆|天津市图书馆|重庆图书馆|重庆市图书馆|浙江图书馆|南京图书馆|广东省立中山图书馆|省(?:图书馆)?$|自治区(?:图书馆)?$/.test(name)) return 0;
+  if (PROVINCIAL_CODES.has(String(item.code)) || /省图书馆$|自治区图书馆$/.test(name)) return 0;
   if (CAPITAL_CITIES.some((city) => name.startsWith(city))) return 1;
   return 2;
 }

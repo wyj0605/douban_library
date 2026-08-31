@@ -1,6 +1,19 @@
 (function (root) {
   "use strict";
   const MAX_LIBRARIES = 2;
+  const LIBRARY_DISPLAY_NAMES = {
+    "3": "湖南省图书馆", "5": "浙江省图书馆", "12": "成都市图书馆", "16": "杭州市图书馆",
+    "20": "广州市图书馆", "22": "武汉市图书馆", "25": "绍兴市图书馆", "29": "长沙市图书馆",
+    "35": "东莞市图书馆", "37": "深圳市图书馆", "38": "上海市浦东图书馆", "41": "重庆市图书馆",
+    "45": "江苏省南京图书馆", "58": "上海市图书馆", "67": "烟台市图书馆", "69": "苏州市图书馆",
+    "75": "天津市图书馆", "77": "北京市首都图书馆", "79": "南京市金陵图书馆", "82": "宁波市图书馆"
+  };
+  function normalizeLibraryName(code, name) {
+    const normalizedCode = String(code || "");
+    if (LIBRARY_DISPLAY_NAMES[normalizedCode]) return LIBRARY_DISPLAY_NAMES[normalizedCode];
+    const value = String(name || "图书馆").trim();
+    return /图书馆$/.test(value) ? value : `${value}图书馆`;
+  }
   function uniqueCodes(codes, validCodes) {
     const valid = validCodes ? new Set(validCodes.map(String)) : null;
     return [...new Set((codes || []).map(String))].filter((code) => !valid || valid.has(code)).slice(0, MAX_LIBRARIES);
@@ -25,10 +38,10 @@
     const holdings = Array.isArray(payload?.holdings) ? payload.holdings : [];
     return {
       ok: Boolean(payload?.ok), empty: !payload?.ok || holdings.length === 0,
-      library: { code: String(library.code || ""), name: library.name || "图书馆" },
+      library: { code: String(library.code || ""), name: normalizeLibraryName(library.code, library.name) },
       book: { title: book.title || holdings[0]?.title || "", author: book.author || holdings[0]?.author || "", publisher: book.publisher || holdings[0]?.publisher || "", pubdate: book.pubdate || holdings[0]?.pubdate || "", isbn: payload?.isbn || book.isbn || "" },
       holdings: holdings.map((item) => ({ location: item.location || "馆藏地点未标注", callNumber: item.call_number || "未知", status: item.status || (item.available ? "在馆" : "未知"), available: item.available === true || Number(item.loanable_count) > 0, loanableCount: Number.isFinite(Number(item.loanable_count)) ? Number(item.loanable_count) : null, copyCount: Number.isFinite(Number(item.copy_count)) ? Number(item.copy_count) : null, returnDate: item.return_date || "" }))
     };
   }
-  root.ExtensionUtils = { MAX_LIBRARIES, uniqueCodes, migrateSelection, extractIsbn, normalizeResponse };
+  root.ExtensionUtils = { MAX_LIBRARIES, uniqueCodes, migrateSelection, extractIsbn, normalizeLibraryName, normalizeResponse };
 })(globalThis);

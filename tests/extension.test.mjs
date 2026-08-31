@@ -18,3 +18,9 @@ test("结构化响应保留真实馆藏状态和元数据", () => {
   assert.equal(value.book.author, "刘震云著"); assert.equal(value.holdings[0].status, "锁定"); assert.equal(value.empty, false);
 });
 test("空结果可稳定识别", () => { assert.equal(U.normalizeResponse({ ok: true, holdings: [] }, { code: "1", name: "黑龙江省图书馆" }).empty, true); });
+test("图书馆显示名称统一包含省市行政区", () => {
+  assert.equal(U.normalizeLibraryName("5", "浙江图书馆"), "浙江省图书馆");
+  assert.equal(U.normalizeLibraryName("20", "广州图书馆"), "广州市图书馆");
+  assert.equal(U.normalizeLibraryName("77", "首都图书馆"), "北京市首都图书馆");
+  assert.equal(U.normalizeLibraryName("85", "海南省图书馆"), "海南省图书馆");
+});

@@ -18,13 +18,13 @@ async function fetchJson(path, options = {}) {
 
 async function getLibraries(refresh = false) {
   const stored = await chrome.storage.local.get(["libraryRegistry"]);
-  if (!refresh && Array.isArray(stored.libraryRegistry) && stored.libraryRegistry.length) return stored.libraryRegistry;
+  if (!refresh && Array.isArray(stored.libraryRegistry) && stored.libraryRegistry.length) return stored.libraryRegistry.map((item) => ({ ...item, name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
   try {
     const data = await fetchJson("/api/libraries");
-    const libraries = (data.libraries || []).map((item) => ({ code: String(item.code), name: String(item.name) }));
+    const libraries = (data.libraries || []).map((item) => ({ code: String(item.code), name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
     if (libraries.length) { await chrome.storage.local.set({ libraryRegistry: libraries }); return libraries; }
   } catch (error) { console.warn("图书馆列表更新失败，使用离线列表:", error.message); }
-  return FALLBACK_LIBRARIES;
+  return FALLBACK_LIBRARIES.map((item) => ({ ...item, name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
 }
 
 async function getState(refresh = false) {
