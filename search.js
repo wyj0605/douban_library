@@ -75,14 +75,20 @@ async function performSearch(query, code) {
     console.log('发送请求到:', bookRecnoUrl);
     console.log('请求参数:', requestData);
 
+    // 强制使用HTTPS，防止请求被降级到不安全的连接
+    if (!/^https:\/\//i.test(bookRecnoUrl)) {
+        throw new Error('接口地址必须使用HTTPS协议');
+    }
+
     try {
-        // 发送请求到查书接口
+        // 发送请求到查书接口，禁止自动跟随重定向，避免被重定向到非HTTPS地址
         const response = await fetch(bookRecnoUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(requestData)
+            body: JSON.stringify(requestData),
+            redirect: 'error'
         });
         console.log('请求响应状态:', response.status);
 
