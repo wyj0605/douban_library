@@ -56,7 +56,7 @@ async function searchBooks(query, codes) {
 
 async function createContextMenu() {
   await chrome.contextMenus.removeAll();
-  chrome.contextMenus.create({ id: "searchBook", title: '查书助手 “%s”', contexts: ["selection"] });
+  chrome.contextMenus.create({ id: "searchBook", title: '豆瓣+图书馆查询助手 “%s”', contexts: ["selection"] });
 }
 chrome.runtime.onInstalled.addListener(() => { createContextMenu(); getState(true); });
 chrome.runtime.onStartup.addListener(() => { createContextMenu(); getState(true); });
