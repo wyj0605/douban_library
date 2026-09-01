@@ -38,6 +38,7 @@ const provinces = [
   { code: "67", name: "烟台市" },
   { code: "68", name: "威海市" },
   { code: "89", name: "大连图书馆" },
+  { code: "90", name: "沈阳市图书馆" },
   { code: "22", name: "武汉市" },
   { code: "63", name: "石家庄市图书馆" },
   { code: "64", name: "唐山市" },
