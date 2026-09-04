@@ -1,6 +1,7 @@
 importScripts("provinces.js", "extension-utils.js");
 const API_BASE = "https://navy82.icu";
 const REQUEST_TIMEOUT = 20000;
+const LIBRARY_CACHE_TTL = 6 * 60 * 60 * 1000;
 const FALLBACK_LIBRARIES = globalThis.LIBRARIES || [];
 
 async function fetchJson(path, options = {}) {
@@ -17,13 +18,21 @@ async function fetchJson(path, options = {}) {
 }
 
 async function getLibraries(refresh = false) {
-  const stored = await chrome.storage.local.get(["libraryRegistry"]);
-  if (!refresh && Array.isArray(stored.libraryRegistry) && stored.libraryRegistry.length) return stored.libraryRegistry.map((item) => ({ ...item, name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
+  const stored = await chrome.storage.local.get(["libraryRegistry", "libraryRegistryMeta"]);
+  const cached = Array.isArray(stored.libraryRegistry) ? stored.libraryRegistry : [];
+  const fetchedAt = Number(stored.libraryRegistryMeta?.fetchedAt || 0);
+  if (!refresh && cached.length && Date.now() - fetchedAt < LIBRARY_CACHE_TTL) {
+    return cached.map((item) => ({ ...item, name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
+  }
   try {
     const data = await fetchJson("/api/libraries");
-    const libraries = (data.libraries || []).map((item) => ({ code: String(item.code), name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
-    if (libraries.length) { await chrome.storage.local.set({ libraryRegistry: libraries }); return libraries; }
+    const libraries = (data.libraries || []).filter((item) => item.enabled !== false).map((item) => ({ code: String(item.code), name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
+    if (libraries.length) {
+      await chrome.storage.local.set({ libraryRegistry: libraries, libraryRegistryMeta: { version: data.version || "", fetchedAt: Date.now() } });
+      return libraries;
+    }
   } catch (error) { console.warn("图书馆列表更新失败，使用离线列表:", error.message); }
+  if (cached.length) return cached.map((item) => ({ ...item, name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
   return FALLBACK_LIBRARIES.map((item) => ({ ...item, name: ExtensionUtils.normalizeLibraryName(item.code, item.name) }));
 }
 
@@ -41,7 +50,7 @@ async function getState(refresh = false) {
 async function searchOne(query, code, libraries) {
   const fallback = libraries.find((item) => item.code === code) || { code, name: `图书馆 ${code}` };
   try {
-    const payload = await fetchJson("/jilin_search", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ query, code, v: 2, client: "browser-extension", extension_version: "1.4.0" }) });
+    const payload = await fetchJson("/jilin_search", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ query, code, v: 2, client: "browser-extension", extension_version: "1.5.0" }) });
     return ExtensionUtils.normalizeResponse(payload, fallback);
   } catch (error) {
     return { ok: false, empty: false, library: fallback, book: {}, holdings: [], error: error.message || "查询失败" };
@@ -59,7 +68,7 @@ async function createContextMenu() {
   chrome.contextMenus.create({ id: "searchBook", title: '豆瓣+图书馆查询助手 “%s”', contexts: ["selection"] });
 }
 chrome.runtime.onInstalled.addListener(() => { createContextMenu(); getState(true); });
-chrome.runtime.onStartup.addListener(() => { createContextMenu(); getState(true); });
+chrome.runtime.onStartup.addListener(() => { createContextMenu(); getState(false); });
 chrome.contextMenus.onClicked.addListener(async (info) => {
   if (info.menuItemId !== "searchBook" || !info.selectionText?.trim()) return;
   const state = await getState();

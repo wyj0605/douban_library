@@ -1,0 +1,42 @@
+{
+  "name": "chashu-zhushou",
+  "productName": "查书助手",
+  "version": "2.3.0",
+  "description": "豆瓣+图书馆查询助手桌面版 - 快速查询全国各大图书馆馆藏信息",
+  "main": "main.js",
+  "author": "wangyijun",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac",
+    "dist:dir": "electron-builder --mac --dir",
+    "dist:win": "electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.wangyijun.chashu",
+    "productName": "查书助手",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.reference",
+      "icon": "assets/icon.png",
+      "target": ["dmg", "zip"]
+    },
+    "win": {
+      "icon": "build-assets/windows-icon.png",
+      "target": ["portable"],
+      "artifactName": "查书助手-${version}-Windows-x64.${ext}"
+    }
+  }
+}

@@ -45,8 +45,11 @@
         const hasCopyCount = item.copy_count !== null && item.copy_count !== undefined && item.copy_count !== "";
         const loanableCount = hasLoanableCount && Number.isFinite(Number(item.loanable_count)) ? Number(item.loanable_count) : null;
         const copyCount = hasCopyCount && Number.isFinite(Number(item.copy_count)) ? Number(item.copy_count) : null;
-        const available = item.available === true || (loanableCount !== null && loanableCount > 0);
-        const status = item.status || (available ? "在馆" : loanableCount === 0 ? "借出" : "状态未提供");
+        const rawStatus = String(item.status || "").trim();
+        const explicitlyUnavailable = /(借出|外借|不可借|预约|锁定|丢失|遗失|处理中|修补|剔除)/.test(rawStatus);
+        const explicitlyAvailable = /(可借|在馆|在架|入藏|可外借)/.test(rawStatus) && !explicitlyUnavailable;
+        const available = explicitlyUnavailable ? false : explicitlyAvailable ? true : item.available === true || (loanableCount !== null && loanableCount > 0);
+        const status = explicitlyUnavailable ? (rawStatus === "借出" ? "借出" : rawStatus) : explicitlyAvailable ? "在馆" : rawStatus || (available ? "在馆" : loanableCount === 0 ? "借出" : "状态未提供");
         return { location: item.location || "馆藏地点未标注", callNumber: item.call_number || "未知", status, available, loanableCount, copyCount, returnDate: item.return_date || "" };
       })
     };

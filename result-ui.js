@@ -27,7 +27,7 @@
       const row = el("article", "dl-holding");
       const top = el("div", "dl-holding__top"); top.append(el("strong", "", h.location), el("span", h.available ? "dl-status is-ok" : "dl-status", h.status));
       const detail = el("div", "dl-holding__detail"); detail.append(el("span", "", `索书号：${h.callNumber}`));
-      if (h.loanableCount !== null && h.copyCount !== null) detail.append(el("span", "", `${h.loanableCount}/${h.copyCount} 可借`));
+      if (h.loanableCount !== null && h.copyCount !== null) detail.append(el("span", "", `${h.loanableCount}/${h.copyCount}`));
       if (h.returnDate) detail.append(el("span", "", `应还：${h.returnDate}`));
       row.append(top, detail); list.append(row);
     }); box.append(list); return box;

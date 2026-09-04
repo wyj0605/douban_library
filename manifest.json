@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "豆瓣+图书馆查询助手",
   "permissions": ["storage", "contextMenus"],
-  "version": "1.4.0",
+  "version": "1.5.0",
   "minimum_chrome_version": "109",
   "host_permissions": ["https://navy82.icu/*"],
 

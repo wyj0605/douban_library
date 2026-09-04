@@ -23,6 +23,19 @@ test("可借数为零但无明确状态时显示借出", () => {
   assert.equal(value.holdings[0].status, "借出");
   assert.equal(value.holdings[0].available, false);
 });
+test("真实状态优先于可能矛盾的可借数量", () => {
+  const borrowed = U.normalizeResponse({ ok: true, holdings: [{ status: "借出", loanable_count: 1, copy_count: 33 }] });
+  assert.equal(borrowed.holdings[0].status, "借出");
+  assert.equal(borrowed.holdings[0].available, false);
+  const available = U.normalizeResponse({ ok: true, holdings: [{ status: "可借", loanable_count: 1, copy_count: 1 }] });
+  assert.equal(available.holdings[0].status, "在馆");
+  assert.equal(available.holdings[0].available, true);
+});
+test("界面保留数量但不在数量后追加可借标签", () => {
+  const source = fs.readFileSync(new URL("../result-ui.js", import.meta.url), "utf8");
+  assert.match(source, /\$\{h\.loanableCount\}\/\$\{h\.copyCount\}/);
+  assert.doesNotMatch(source, /\$\{h\.copyCount\} 可借/);
+});
 test("图书馆显示名称统一包含省市行政区", () => {
   assert.equal(U.normalizeLibraryName("5", "浙江图书馆"), "浙江省图书馆");
   assert.equal(U.normalizeLibraryName("20", "广州图书馆"), "广州市图书馆");

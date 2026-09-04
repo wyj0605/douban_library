@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设置 - 选择查询图书馆</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 设置窗口专属样式 */
+        body { height: 100vh; }
+
+        .settings-main {
+            flex: 1;
+            overflow-y: auto;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 18px 24px 28px;
+        }
+
+        .settings-banner {
+            padding: 11px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 8%, var(--panel));
+            border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+            border-radius: var(--radius);
+        }
+
+        .lib-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+        }
+
+        .lib-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .lib-option:hover { border-color: var(--accent); }
+
+        .lib-option.checked {
+            border-color: var(--accent);
+            background: color-mix(in srgb, var(--accent) 9%, var(--panel));
+        }
+
+        .lib-option input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .lib-option .lib-name { flex: 1; }
+
+        .lib-option .check-mark {
+            color: var(--accent);
+            font-weight: 700;
+            visibility: hidden;
+        }
+
+        .lib-option.checked .check-mark { visibility: visible; }
+
+        .lib-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .settings-footer {
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            background: var(--panel);
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path fill="currentColor" d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM6 4h5v8l-2.5-1.5L6 12V4zm12 16H6v-2h12v2zm0-4H6v-2h12v2zm0-4h-5V4h5v8z"/>
+                </svg>
+                <h1>设置 - 查询图书馆</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="settings-main">
+        <div class="settings-banner">
+            最多可选择 2 个图书馆，勾选后自动保存，切换后主窗口即时生效。
+        </div>
+        <div id="libGrid" class="lib-grid"></div>
+    </main>
+
+    <footer class="settings-footer">
+        <span id="selectedCount">已选择 0 / 2 个图书馆</span>
+    </footer>
+
+    <script src="provinces.js"></script>
+    <script src="settings.js"></script>
+</body>
+</html>
